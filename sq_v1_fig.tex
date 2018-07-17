@@ -1,0 +1,124 @@
+\documentclass[border=10pt,]{standalone}
+\usepackage{pgfplots}
+\usetikzlibrary{positioning}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{height=7cm,compat=1.14}
+
+\begin{document}
+\begin{tikzpicture}[
+    declare function={a(\x)=0.8*\x;},
+    declare function={t(\x)=(exp(-(\x+2)^2/2.7));},
+    declare function={c(\x)=(1/3)*exp(-(\x)^2)+(2/3)*exp(-(\x-3)^2);},
+    declare function={f_h(\x)=23;},
+    declare function={f_l(\x)=0.95;},
+    declare function={f(\x) =(6*\x+2)^2*sin((12*\x+4)r)+16;} % modified version of forrester function
+    ]
+    % SQ model, and training data
+    \begin{axis}[
+        % domain=-1:0,
+        % xmin=-1,
+        axis lines=left,
+        % axis equal image,
+        xtick=\empty, ytick=\empty,
+        enlargelimits=true,
+        clip mode=individual, clip=false
+        x label style={at={(axis description cs: -0.5,-0.1)},anchor=north},
+        xlabel={x},
+        ylabel={Reward}
+    ]
+        \addplot [name path=model,gray, samples=1000, domain=-1.:0,thick] {f(x)};
+
+        % fake training data
+        \pgfmathsetseed{2}
+        \addplot [gray, only marks, samples=25, mark size=0.75,domain=-1:0] {f(x)+rand*2};
+
+        % invisible paths for upper and lower confidence bounds, we will fill between these
+        \addplot [name path=ucl,color=none, samples=1000, domain=-1:0,opacity=0.0] {f(x)+2} node[pos=0.9]{}(eq);
+        \addplot [name path=lcl,color=none, samples=1000, domain=-1:0,opacity=0.0] {f(x)-2};
+        \addplot[thick,color=gray,fill=gray,fill opacity=0.1]
+        fill between[of=ucl and lcl];
+
+        % Reference lines
+        % \addplot[black, mark=\empty,domain=-0.7:-1.1,dashed] {f_h(x)};
+        \addplot[black, mark=\empty,domain=-0.0:-1.1,dashed] {f_l(x)} node[pos=1](rl){};
+        \node [above,color=black] at (rl) {$\scriptstyle r_L$};
+
+        \draw [<->,dashed,black] (-0.28,1.5) -- (-0.28,15.5) node[pos=0.5] (mt){};
+        \node [above,color=black,right] at (mt) {$\scriptstyle \mu_t-r_L$};
+        \draw [<->,dashed,black] (-0.35,1.5) -- (-0.35,12.5) node[pos=0.5](mc){};
+        \node [above,color=black,left] at (mc) {$\scriptstyle \mu_c-r_L$};
+        \draw [<->,dashed,black] (-0.9,1.5) -- (-0.9,22.5) node[pos=0.60](rh){};
+        \node [above,color=black,left] at (rh) {$\scriptstyle r_H-r_L$};
+
+        %%%% s equation
+        % \node [above=0.125cm,color=black] at (axis description cs: 0.5,0.0) {$\scriptstyle s=\frac{\tilde{\mu}_1(C,r_{low}) - \tilde{\mu}_1(T,r_{low})}{\tilde{\mu}_1(R,r_{low})}$};
+
+        \legend{}
+    \end{axis}
+
+    % Candidate and Trusted at location of interest
+    \begin{axis}[
+            smooth,
+            % axis equal image,
+            axis lines=none,
+            xtick=\empty, ytick=\empty,
+            clip mode=individual, clip=false,
+            domain=-6:6,
+            % scale=0.25,
+            rotate=-90,
+            x=0.1cm,
+            y=0.3cm,
+            at={(3.75cm,3.88cm)}
+        ]
+        \addplot[name path=c,very thin,opacity=0.5] {c(x)};
+        \addplot[name path=t,very thin,opacity=0.5] {t(x)};
+        \path[name path=axis,very thin,opacity=0.5] (axis cs:-1,0) -- (axis cs:1,0);
+        \addplot[thick,color=red,fill=red,fill opacity=0.1,area legend] fill between[of=t and axis];
+        \addlegendentry{\tiny trusted};
+        \addplot[thick,color=blue,fill=blue,fill opacity=0.1,area legend] fill between[of=c and axis,area legend];
+        \addlegendentry{\tiny candidate};
+
+        \draw [dotted,opacity=0.5] (-2,0) -- (-2,3);
+        \path[<-,draw] (-2,0.5) to[out=120,in=-90] (-9,2) node[](tm) {};
+        \node [color=black,right] at (tm) {$\scriptstyle T\sim(\mu_T,\sigma_T)$};
+
+        \draw [dotted,opacity=0.5] (2.5,0.0) -- (2.5,2);
+        \path[<-,draw] (2.5,0.25) to[out=-70,in=90] (8,-1.5) node[](cm) {}; 
+        \node [color=black,left] at (cm) {$\scriptstyle C\sim(\mu_C,\sigma_C)$};
+
+        \legend{};
+    \end{axis}
+
+    %% Trusted Distribution at r_H
+    \begin{axis}[
+        smooth,
+        % axis equal image,
+        axis lines=none,
+        xtick=\empty, ytick=\empty,
+        clip mode=individual, clip=false,
+        domain=-6:2,
+        % scale=0.25,
+        rotate=-90,
+        x=0.1cm,
+        y=0.3cm,
+        at={(2.2cm,5.16cm)},
+        legend style={at={(-0.5,10)},nodes={scale=0.5, transform shape}},
+        legend image post style={scale=0.5}
+        ]
+        \addlegendimage{gray,thick}\addlegendentry{SQ Model}
+        \addlegendimage{only marks,mark=*,opacity=0.0,fill=gray,fill opacity=1,mark size=2pt}\addlegendentry{Training Data};
+        \addlegendimage{only marks,mark=square*,opacity=0.0,fill=red,fill opacity=0.1,mark size=4pt}\addlegendentry{Trusted};
+        \addlegendimage{only marks,mark=square*,opacity=0.0,fill=blue,fill opacity=0.1,mark size=4pt}\addlegendentry{Candidate};
+        \addlegendimage{only marks,mark=square*,opacity=0.0,fill=green,fill opacity=0.1,mark size=4pt}\addlegendentry{Reference};
+
+        \addplot[name path=rh,very thin,opacity=0.5] {t(x)};
+        \path[name path=axis] (axis cs:-1,0) -- (axis cs:1,0);
+
+        \addplot[thick,color=green,fill=green,fill opacity=0.1,area legend] fill between[of=rh and axis];
+
+        \draw [dotted,opacity=0.5] (-2,-4) -- (-2,2);
+        \path[<-,draw] (-2,0.5) to[out=-120,in=90] (-5,-1) node[](rm) {};
+        \node [color=black,left] at (rm) {$\scriptstyle R\sim(r_H,\sigma_T)$};
+    \end{axis}
+\end{tikzpicture}
+\end{document}

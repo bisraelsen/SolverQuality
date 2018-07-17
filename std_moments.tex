@@ -1,0 +1,25 @@
+\subsubsection{Standard Moments}
+We had a couple of ideas about how to calculate SQ that didn't pan out.
+
+The first attempt was to use a metric that not only took into account the expected value of the distribution, but also its variance. We used the idea of the `standard moment' in statistics to address this.
+
+The first standard moment is the ratio of the mean of a distribution to its standard deviation, and is unitless. This metric could be useful for comparing two distributions, but generally the first standardized moment is 0 because it is defined as a central moment (moment about the mean of the distribution). Due to this we extend the definition of standardized moments to be about an external reference $r^*$ in Equation \ref{eq:std_mom}. Given this we then make use of the `first standardized moment about $r^*$' to compare reward distributions of different solver policies.
+
+\begin{align}
+    \tilde{\mu}_n&=\frac{\mathbb{E}[(X-r^*)^n]}{(\mathbb{E}[(X-r^*)^2])^{n/2}} \label{eq:std_mom}\\
+    \tilde{\mu}_1&(X,r^*)=\frac{\bar{X}-r^*}{s_{X}}
+\end{align}
+
+If we have some reference reward range $\[r_{low},r_{high}]$, we can calculate the first standardized moment of both the trusted distribution and the candidate distribution with reference to $r_{low}$. Taking the difference between the distributions from the candidate solver $C$ and the trusted solver $T$  is useful (i.e. greater than zero candidate is `better', less than zero trusted is `better', equal to zero both are equal). However, absent some global scale it is difficult to say how much better in a given problem. To address this we make use of a reference distribution with mean $r_{high}$ and standard deviation equal to that of the trusted solution $s_{T}$. Doing this gives a principled baseline by which we can scale the difference. This is shown in Equation \ref{eq:s}.
+
+\begingroup
+\addtolength{\jot}{1em}
+\begin{align}
+    s &= \frac{\tilde{\mu}_1(C,r_{low}) - \tilde{\mu}_1(T,r_{low})}{\tilde{\mu}_1(R,r_{low})}\label{eq:s}\\
+    SQ &= \frac{2}{1+exp(-s/5)}\label{eq:SQ}
+\end{align}
+\endgroup
+
+We didn't end up using this method because sometimes it reported over/under confidence when the standard moments of two distributions effectively `switched places' due to the distribution with a higher expected value having a lower standard moment than a distribution with a lower expected value. Perhaps this could be fixed by adding a $signum$ in front?
+
+Instead we started looking a different direction.

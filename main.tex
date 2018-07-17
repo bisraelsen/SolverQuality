@@ -1,0 +1,66 @@
+\documentclass[sigconf,authordraft]{acmart}
+
+\usepackage{pgfgantt}
+\usepackage{booktabs}
+\usepackage{graphicx,caption}
+\usepackage{mathtools}%loads amsmath
+\usepackage{amssymb,amsfonts}
+% \usepackage[caption=false]{subfig}
+% \captionsetup{width=\textwidth}
+\usepackage{hyperref}
+\usepackage[margin=0.75in]{geometry}
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+\acmDOI{10.475/123_4}
+
+% ISBN
+\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+\acmConference[FAT* 2019]{Conference on Fairness, Accountability, and Tranparency}{January 2019}{Atlanta, Georgia USA}
+\acmYear{2019}
+\copyrightyear{2019}
+
+\acmPrice{15.00}
+
+\acmSubmissionID{123-A12-B3}
+
+\begin{document}
+
+\title{Meta-analysis of Markov Decision Processes for Transparency}
+\author{Author 1}
+    \orcid{0000-0000-0000-0000}
+    \email{ano.ny@mous.com}
+\author{Author 2}
+    \affiliation{%
+        \institution{Prestigious Institution}
+        \city{city}
+        \state{state}
+        \country{country}
+    }
+\begin{abstract}
+    Stuff about Solver Quality. Trying to see if this will work. Now, back to the figures.
+\end{abstract}
+\maketitle
+
+\input{"outline.tex"}
+\input{"introduction.tex"}
+\input{"methodology.tex"}
+\input{"results.tex"}
+\input{"conclusions.tex"}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{References}
+
+\end{document}
