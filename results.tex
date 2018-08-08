@@ -12,13 +12,13 @@ Show some results of `simulated' and `realistic' applications.
 
 \subsection{Varying $d$ on the road-network}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.4\linewidth]{Figures/original_roadnet.png}
     \caption{Diagram of the `Road Network' layout. Node 1 (yellow) is the start location of the UGV. Node 4 (red) is the start location of the pursuer vehicle. Node 13 (green) is the exit node.}
     \label{fig:roadnet}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.4\linewidth]{Figures/medium_roadnet.png}
     \caption{Diagram of a randomly generated road network that is quite a bit larger than the original shown in Figure \ref{fig:roadnet}.}
@@ -59,13 +59,13 @@ In this case we choose the trusted solver to be a MCTS solver with $N=1000$, $D=
 \subsection{Varying the transition probability}
 In this case a solver quality model was trained using a `trusted' MCTS solver with:
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/transition_vary_tprob_ok.pdf}
     \caption{Using a solver with depth 3}
     \label{fig:tprob}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/transition_vary_tprob_bad.pdf}
     \caption{Using a solver with depth 1}
@@ -74,13 +74,13 @@ In this case a solver quality model was trained using a `trusted' MCTS solver wi
 
 \subsection{Varying the transition probability and exploration constant}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
     \caption{using a solver with depth 3}
     \label{fig:tprob}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
     \caption{Using a solver with depth 1}

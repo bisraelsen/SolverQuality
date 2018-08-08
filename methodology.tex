@@ -1,18 +1,4 @@
 \section{Methodology}
-    \begin{itemize}
-        \item Possible Approach
-        \begin{itemize}
-            \item compare utilities? policies may not calculate for all state-action pairs
-            \item compare state-action `coverage'? approx. policies don't investigate the whole state-action space
-            \item compare rwd distribution? does not have above limitations, but is expensive to calculate
-        \end{itemize}
-        \item proposed training/testing diagram
-    \end{itemize}
-
-\subsection{Dead ends}
-\include{"std_moments.tex"}
-\include{"EI.tex"}
-
 \subsection{Calculating SQ}
 In order to calculate SQ we first quantify the `overlap' between the trusted distribution, and the candidate distribution, denoted as $T$ and $C$ respectively. This can be done by calculating the distance between two different distributions. There are several different distance metrics that can be used on statistical distributions, but the Hellinger metric is a type of `$f$-divergence', with $f=(\sqrt{t}-1)^2$.
 
@@ -35,13 +21,13 @@ When calculating SQ, we do not require Normal distributions. Rather, we only req
 
 It helps to see a plot to visualize the properties of the Hellinger distance between two distributions. Figure \ref{fig:hellinger_surf} shows how the distance measure varies with a changing $\mu_1$ and $\sigma_1$. In this example $\mu_2=0.0$ and $\sigma_2=1.0$.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/hellinger_surf}
     \caption{Visualization of how the Hellinger distance varies with $\Delta\mu=\mu_1-\mu_2$ and $\sigma_1$ when $\mu_2=0.0$ and $\sigma_2=1.0$}
     \label{fig:hellinger_surf}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{build/sq_v2_fig}
     \caption{Figure that graphically depicts the key values involved in calculating SQ.}
@@ -62,7 +48,7 @@ Incorporating all of these ideas together yields the equation for solver quality
 
 The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. Basically, should the relationship between $f$ and $H_{\mathcal{N}}$ be $1\to1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{sq}$ as $f$ grows smaller, and $f$ should be more influential as it increases. The effects of different values of $\alpha$ are illustrated in Figure \ref{fig:alphas}. We have found $\alpha=1/2$ gives results that `make sense' to users; future work could investigate the `best' value for $\alpha$ via user studies.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/power_comparison}
     \caption{Relative effects of different values of $\alpha$.}
@@ -79,7 +65,7 @@ We use $L=2$ so that when $s=0$ (distributions are identical) SQ will be 1. The 
 \begin{align}
     \text{SQ} &= \frac{2}{1+exp(-\text{sq}/5)}\label{eq:SQ}
 \end{align}
-\begin{figure*}[htbp]
+\begin{figure*}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/logistic_saturation}
     \caption{Illustration of the behavior of the logistic function given different values of $k$. With $k=1$ the function reaches `saturation' at around $\pm5$. This `saturation' point $x_{sat}\approx 5/k$ helps to design SQ to be able have the right scale when comparing distributions.}
@@ -88,7 +74,7 @@ We use $L=2$ so that when $s=0$ (distributions are identical) SQ will be 1. The 
 
 Figure \ref{fig:sq_surf} shows the behavior of SQ when $\sigma_1=1.0,\mu_2=0.0,\sigma_2=1.0$, and $\mu_1$ and $f$ vary.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/sq_surf}
     \caption{Variation in SQ based on change in $\mu_1$ and $f$ compared for different values of $\alpha$.}
@@ -96,18 +82,18 @@ Figure \ref{fig:sq_surf} shows the behavior of SQ when $\sigma_1=1.0,\mu_2=0.0,\
 \end{figure}
 
 \subsection{Examples}
-It is easiest to show results of this calculation on some simple examples. Figure \ref{fig:sq_thry1} is a toy example showing the expected reward (with uncertainty) for a trusted solver given a specific task parameter, as well as that for a `candidate' solver. Different points of interest (indicating specific values of the task parameter) are highlighted by a star.
+It is easiest to show results of this calculation on some simple examples. Figure \ref{fig:sq_thry1} is a toy example showing the expected reward (with uncertainty) for a trusted solver given a specific task parameter, as well as that of a `candidate' solver. Different points of interest (indicating specific values of the task parameter) are highlighted by a star.
 
 Figure \ref{fig:sq_thry2} shows a cross-section of the graph at the corresponding value of the task parameter. \textbf{talk a bit more here about each of the examples}.
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/p1}
     \caption{example of expected rewards of solvers versus variation of a problem parameter}
     \label{fig:sq_thry1}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/point_compare}
     \caption{Plots depicting the distributions at each of the points indicated in \ref{fig:sq_thry1}. Solver quality (SQ) values are shown for several different values of the solver reward range $r$}

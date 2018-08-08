@@ -1,7 +1,5 @@
 \section{Introduction}
-A little longer version of the abstract.
-
-Main goal: Argue for SC, and $x_Q$. Present $x_Q$ and justify decisions. Demonstrate the performance on `realistic simulations'.
+Main goal: Argue for SC, and \xQ. Present \xQ{} and justify decisions. Demonstrate the performance on `realistic simulations'.
 
 within the scope of FAT* `topics of interest' we fall under the \emph{Transparency} branch. Specifically `Interpretability of ML models', and `Generation of explanations' (although probably more interpretability according to most people's definitions).
 
@@ -22,7 +20,7 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
     \item Related work---quickly review some related work in the area
     \item Approach---desiderata, Hellinger distance, etc
     \item Results/Discussion---Illustrative example, and theoretical example
-    \item Conclusions/Future Work---restate purpose of SC, and particularly $x_Q$. Discuss continuing efforts to quantify effects with human-involved experiments. Further development of $x_H$, $x_I$, and $x_M$.
+    \item Conclusions/Future Work---restate purpose of SC, and particularly \xQ. Discuss continuing efforts to quantify effects with human-involved experiments. Further development of \xH, \xI, and \xM.
 \end{itemize}
 
 \subsection{Related Work}
@@ -35,45 +33,6 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
     inverse RL is learning a reward function by observing a policy.
 
 \subsection{Factorized Machine Self-Confidence}
-    Several definitions of self-confidence have been proposed in recent works. Much of this work is reviewed in \cite{Israelsen2017-ym}, where self-confidence is identified as an explicit assurances in a human-autonomy trust relationship. According to \cite{Sweet2016-tz} the four views on self-confidence are the \textit{anthropomorphic view}, the \textit{uncertainty view}, the \textit{experiential view}, and the \textit{stability view}. The anthropomorphic view defines self-confidence to be similar to how humans express self-confidence, while the experiential view expresses self-confidence based on past experience. The uncertainty view simply defines self-confidence to be the probability of success or failure, and the stability view defines self-confidence to be the sensitivity of the probability of success to uncertainty. All of these views seem to reflect different parts of a more general concept: understanding an autonomy's ability to do a specific task. This leads to the following definition of self-confidence.
-
-    We define self-confidence to be: \textbf{An agent's perceived ability to achieve assigned goals (within a defined region of autonomous behavior) after accounting for (1) uncertainties in its knowledge of the world, (2) uncertainties of its own state, and (3) uncertainties about its reasoning process and execution abilities.}
-
-    The formal definition of self-confidence we use is from \cite{Aitken2016-cv}, wherein five dimensions of self confidence are defined. They are:
-
-        \begin{itemize}
-            \item $x_I$ `Command Interpretation'
-            \begin{itemize}
-                \item are autonomy and user `on same page'?
-            \end{itemize}
-            \item $x_M$ `Model Validity'
-            \begin{itemize}
-                \item How well does autonomy's model reflect reality?
-            \end{itemize}
-            \item $x_Q$ `Solver Quality'
-            \begin{itemize}
-                \item how well can the solver use the model to generate policies/plans?
-            \end{itemize}
-            \item $x_P$ `Predicted Outcome Assessment'
-            \begin{itemize}
-                \item how `good' is expected distribution of results?
-            \end{itemize}
-            \item $x_H$ `Past Performance'
-            \begin{itemize}
-                \item how well has autonomy done in similar circumstances?
-            \end{itemize}
-            \item Assume that $SC = \mathsc{F}(X_{SC})\rightarrow [-1,1]$
-        \end{itemize}
-
-    Outcome assessment has been previously defined in \cite{Aitken2016-cv}, but has yet to been evaluated as an effective assurance as per the guidelines laid out in the work on assurances. Solver Quality is a metric that is, as yet, un-explored. The following are my targeted contributions for this work:
-
-    \begin{itemize}
-        \item Develop the $x_3$ `Solver Quality' (SQ) metric
-        \item Develop a general approach for designing SC experiments
-        \item Develop an experimental environment in which SC metrics can be evaluated with human participants
-        \item Evaluate the `Predicted Outcome Assessment' metric developed by \cite{Aitken2016-cv}
-    \end{itemize}
-
     \begin{figure*}[tbp]
         \centering
         \includegraphics[width=0.65\linewidth]{Figures/SC_flowchart.pdf}
@@ -81,49 +40,56 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
         \label{fig:famsec}
     \end{figure*}
 
-\subsection{Solver Quality}
-    \begin{itemize}
-        \item Desiderata
+    Several definitions of self-confidence have been proposed in recent works. Much of this work is reviewed in \cite{Israelsen2017-ym}, where self-confidence is identified as an explicit assurances in a human-autonomy trust relationship. According to \cite{Sweet2016-tz} the four views on self-confidence are the \textit{anthropomorphic view}, the \textit{uncertainty view}, the \textit{experiential view}, and the \textit{stability view}. The anthropomorphic view defines self-confidence to be similar to how humans express self-confidence, while the experiential view expresses self-confidence based on past experience. The uncertainty view simply defines self-confidence to be the probability of success or failure, and the stability view defines self-confidence to be the sensitivity of the probability of success to uncertainty. All of these views seem to reflect different parts of a more general concept: understanding an autonomy's ability to do a specific task. This leads to the following definition of self-confidence.
+
+    We define self-confidence to be: \textbf{An agent's perceived ability to achieve assigned goals (within a defined region of autonomous behavior) after accounting for (1) uncertainties in its knowledge of the world, (2) uncertainties of its own state, and (3) uncertainties about its reasoning process and execution abilities.}
+
+    The formal definition of self-confidence we use is from \cite{Aitken2016-cv}, wherein five dimensions of self confidence are defined. They are:
+
         \begin{itemize}
-            \item appropriateness
-            \item extend to unseen problems
-            \item compare across solver classes
+            \item [\xH{}:] \textbf{Past Performance}---how well has autonomy done in similar circumstances?
+            \item [\xI{}:] \textbf{Command Interpretation}---are autonomy and user `on the same page'?
+            \item [\xM{}:] \textbf{Model Validity}---How well does autonomy's model reflect reality?
+            \item [\xP{}:] \textbf{Predicted Outcome Assessment}---How favorable is the distribution of predicted outcomes?
+            \item [\xQ{}:] \textbf{Solver Quality}---how well can the solver use the model to generate policies/plans?---how `good' is expected distribution of results?
         \end{itemize}
-    \end{itemize}
-    The SQ metric is meant to address the question: ``How will a given solver $X$ perform on a given (possibly un-encountered) task''? Or, how well-suited is solver $X$ to investigating a certain task. Generally we want the following characteristics for SQ:
 
-    \begin{itemize}
-        \item Reflect the appropriateness of a solver for a given problem
-        \item Useful for unseen problems (of similar type)
-        \item Compare different classes of solvers
-    \end{itemize}
+    Outcome assessment has been previously defined in \cite{Aitken2016-cv}, but has yet to been evaluated as an effective assurance as per the guidelines laid out in the work on assurances. Solver Quality is a metric that is, as yet, un-explored.
 
-    Solvers of all classes share two main properties. They operate on a specified problem, and solver parameters, in order to produce a policy $\pi$. Given the requirement to operate on different classes of solvers the SQ metric must operate on this high-level information. Namely, SQ should take, as inputs, the problem definition, and solver parameters, and produce some metric based on the resulting policy. This approach is inspired by \cite{Leyton-Brown2009-yr} who were able to use `Empirical Hardness Models' to predict the empirical runtime performance of an algorithm on a problem with given features. Figure~\ref{fig:SQ_flowchart} illustrates how this might work for SQ as an assurance. The idea is that SQ would be trained in a supervised manner before use, and then when presented with a task ascertain its performance.
+\subsection{Solver Quality (\xQ)} \label{sec:SQ}
+    The main aim of \xQ{} is to indicate how solver \solve{} with perform on a given (possibly un-encountered) task \task{}. The desiderata are:
 
-    \begin{figure}[htbp]
+    \begin{enumerate}[label=\textbf{D\arabic*}]
+        \item compare across solver classes (high-level constraint)\label{itm:d1}
+        \item reflect competence of solver \solve{} for task \task{} (low-level constraint)\label{itm:d2}
+        \item extend to unseen problems (low-level constraint)\label{itm:d3}
+    \end{enumerate}
+
+    Solvers of all classes share two main properties. They operate on a specified problem, and solver parameters, in order to produce a policy $\pi$. Given the requirement to operate on different classes of solvers the \xQ{} metric must operate on this high-level information. Namely, \xQ{} should take, as inputs, the problem definition, and solver parameters, and produce some metric based on the resulting policy. This approach is inspired by \cite{Leyton-Brown2009-yr} who were able to use `Empirical Hardness Models' (EHMs) to predict the empirical runtime performance of an algorithm on a problem with given features. Figure~\ref{fig:SQ_flowchart} illustrates how this might work for \xQ{} as an assurance. The idea is that \xQ{} would be trained in a supervised manner before use, and then when presented with a task ascertain its performance.
+
+    \begin{figure}[tbp]
         \centering
         \includegraphics[width=0.3\textwidth]{Figures/SQ_EHM.pdf}
         \caption{Flowchart depicting how solver-quality metric could operate as an assurance.}
         \label{fig:SQ_flowchart}
     \end{figure}
-    
 
     In order to evaluate the quality of some solver on a given problem $X$, we propose comparing the policy produced by that solver on $X$ to a `ground truth' policy $\pi^*$. This raises the question of how to compare policies. There are a few different approaches that present themselves:
 
-    \begin{itemize}
-        \item Compare utilities at each state
+    \begin{enumerate}
+        \item Compare utilities at each state \label{itm:i1}
         \begin{itemize}
-            \item Benefits: Evaluates whether states have similar utilities, quick to calculate
-            \item Drawbacks: Does not apply to solvers that represent different amounts of the state-action space (i.e. exact vs. approximate solvers), or to solvers that may represent the state-action space differently (i.e. meta-solvers) 
+            \item Merits: Evaluates whether states have similar utilities, quick to calculate
+            \item Demerits: Does not apply to solvers that represent different amounts of the state-action space (i.e. exact vs. approximate solvers), or to solvers that may represent the state-action space differently (i.e. meta-solvers). Does not satisfy \ref{itm:d1}.
         \end{itemize} 
-        \item Compare `coverage' of the policy
+        \item Compare `coverage' of the policy \label{itm:i2}
         \begin{itemize}
-            \item Benefits: Evaluates how thorough the policy is, quick to calculate
-            \item Drawbacks: Similar limitations as above, not all policies will have the same coverage by design. Also a lot of coverage does not imply a `good' solution
+            \item Merits: Evaluates how `thorough' the policy is, quick to calculate
+            \item Demerits: As with \ref{itm:i1} does not meet \ref{itm:d1} because not all policies will have the same coverage by design. Also high coverage does not imply a `good' solution
         \end{itemize}
-        \item Compare the reward distribution of given policies
+        \item Compare the reward distribution of given policies \label{itm:i3}
         \begin{itemize}
-            \item Benefits: Meets key desired properties (i.e. namely apply across different solver classes)
-            \item Drawbacks: Expensive to calculate the reward distribution via many simulations
+            \item Merits: Meets \ref{itm:d1}
+            \item Demerits: Expensive to calculate the reward distribution via many simulations
         \end{itemize}
-    \end{itemize}
+    \end{enumerate}
