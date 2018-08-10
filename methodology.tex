@@ -43,7 +43,7 @@ Incorporating all of these ideas together yields the equation for solver quality
 \begin{align}
     \Delta \mu &= \mu_c-\mu_t\\
     f &= \Delta \mu/(r_H-r_L) \label{eq:f}\\
-    \text{sq} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(P,Q)} \label{eq:sq}
+    \text{sq} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(T,C)} \label{eq:sq}
 \end{align}
 
 The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. Basically, should the relationship between $f$ and $H_{\mathcal{N}}$ be $1\to1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{sq}$ as $f$ grows smaller, and $f$ should be more influential as it increases. The effects of different values of $\alpha$ are illustrated in Figure \ref{fig:alphas}. We have found $\alpha=1/2$ gives results that `make sense' to users; future work could investigate the `best' value for $\alpha$ via user studies.
