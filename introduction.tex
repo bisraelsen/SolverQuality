@@ -1,6 +1,8 @@
 \section{Introduction}
 Main goal: Argue for SC, and \xQ. Present \xQ{} and justify decisions. Demonstrate the performance on `realistic simulations'.
 
+\nisar{can probably borrow text from Matt's RSS paper and Nick's InfoTech paper to help establish the context and motivation for this work...to argue for need for assurances and self-confidence, need to first establish that autonomous systems/robots are here and rely heavily on ML techniques as well as decision-making algorithms to operate under uncertainty...difficult to ensure transparency because same inputs/operating conditions may lead to different behaviors, which in turn affects user trust...lots of work lately on trust in autonomous systems (cite some refs), which relates very closely to question of how to establish transparency and explainability and predictability, etc. for ML systems...key difference is that autonomous systems are to a large extent expected to be self-directed and self-sufficient decision makers -- though, in reality, they must operate within a delegated scope of action and competency (cite Johnson's `Seven Deadly Myths of Autonomous Systems') ... thus the transparency/explainability question in this case is: how does a system know its own limits and convey this to a user/stakeholder? Or, equivalently: how can an autonomous system justify it's ability to accomplish a task? note: they key insight we bring to the table here is that the question of introspection and communication of a machine's own limits is itself a complex problem of meta-reasoning that requires its own set of AI/learning approaches to tackle...leads to idea of algorithmic self-confidence as an assurance...  }
+
 within the scope of FAT* `topics of interest' we fall under the \emph{Transparency} branch. Specifically `Interpretability of ML models', and `Generation of explanations' (although probably more interpretability according to most people's definitions).
 
 withing the scope of the FAT* tracks I believe that we align with:
@@ -13,11 +15,13 @@ withing the scope of the FAT* tracks I believe that we align with:
 
 We can choose `archival' or `non-archival'. I think we probably want to do archival, since this is a promising `home' for our research anyway.
 
+\nisar{very important: need a statement of contributions -- why should this audience care about this work? what is the intellectual contribution? (would be good to see other papers from previous year's proceedings to see examples)}
+
 \subsection{Proposed outline:}
 
 \begin{itemize}
-    \item Motivation---why MDPs, why meta-analysis, why self-confidence?
-    \item Related work---quickly review some related work in the area
+    \item Motivation---why MDPs, why meta-analysis, why self-confidence? \nisar{should add in some background about autonomous systems concepts that are relevant for this audience to pick up key ideas...}
+    \item Related work---quickly review some related work in the area \nisar{what other ideas specifically should be mentioned?}
     \item Approach---desiderata, Hellinger distance, etc
     \item Results/Discussion---Illustrative example, and theoretical example
     \item Conclusions/Future Work---restate purpose of SC, and particularly \xQ. Discuss continuing efforts to quantify effects with human-involved experiments. Further development of \xH, \xI, and \xM.
@@ -44,7 +48,7 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
 
     We define self-confidence to be: \textbf{An agent's perceived ability to achieve assigned goals (within a defined region of autonomous behavior) after accounting for (1) uncertainties in its knowledge of the world, (2) uncertainties of its own state, and (3) uncertainties about its reasoning process and execution abilities.}
 
-    The formal definition of self-confidence we use is from \cite{Aitken2016-cv}, wherein five factors that compose self confidence are defined. They are:
+    The formal definition of self-confidence we use is from \cite{Aitken2016-cv}, wherein five factors that compose self confidence are defined. They are: \nisar{can add some more detail from proposals...}
 
         \begin{itemize}
             \item [\xH{}:] \textbf{Past Performance}---how well has autonomy done in similar circumstances?

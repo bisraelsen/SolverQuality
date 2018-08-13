@@ -58,6 +58,11 @@
 \newcommand{\xI}{$x_I$}
 \newcommand{\xM}{$x_M$}
 %%%%%%%%%%
+\newcommand{\hlr}[1]{{\color{red} #1}}
+\newcommand{\hlb}[1]{{\color{red} #1}}
+\newcommand{\nisar}[1]{\hlr{NRA: #1}}
+
+%%%%%%%%%%
 
 \begin{document}
 
@@ -74,7 +79,7 @@
         \country{country}
     }
 \begin{abstract}
-    Humans need to be able to appropriately trust autonomous systems before they can appropriately use them, but they cannot trust something that they don't understand to some extent. It is possible for robots to influence a user's trust via `algorithmic assurances'. Here one such assurance is discussed in the context of Markov decision processes. Markov decision processes underlie much of the theory of reinforcement learning, and are commonly used for planning and decision making in robotics. However, it is challenging for human users to understand the limitations of these systems. There are several `meta properties' of Markov decision processes that can help human users to accurately assess the robot's competency in different situations. Herein, one of those properties, called `solver quality', is presented as one useful way by which humans can be assured of a robot's competency. Several trials demonstrate that the metric exhibits desirable properties to be used as an algorithmic assurance.
+    Humans need to be able to appropriately trust autonomous systems before they can appropriately use them, but they cannot trust something that they don't understand to some extent. \nisar{given audience at this conference, not necessary to make this argument here -- better to start off with something like the next sentence:} It is possible for robots to influence a user's trust via `algorithmic assurances'. Here one such assurance is discussed in the context of Markov decision processes \nisar{for autonomous systems} . Markov decision processes underlie much of the theory of reinforcement learning, and are commonly used for planning and decision making under uncertainty in robotics and autonomous systems. However, it is challenging for human users to understand the limitations of these systems. There are several `meta properties' of Markov decision processes that can help human users to accurately assess the robot's competency in different situations \nisar{connect back to `assurances' again here to close the loop -- are the meta-properties themselves the assurance, or part of a larger assurance framework?}. Herein, one of those properties, called `solver quality', is presented as one useful way by which humans can be assured of a robot's competency. Several trials demonstrate that the metric exhibits desirable properties to be used as an algorithmic assurance. \nisar{no mention of `self-confidence' or autonomous systems more generally (not just robots) in abstract or title...not really a fan of the title: seems too limiting and not really explaining the novelty/context of what you're proposing...better to go for a simple title than something witty/clever}
 \end{abstract}
 \maketitle
 
