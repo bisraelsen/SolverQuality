@@ -1,11 +1,11 @@
 \section{Methodology}
-Given the requirement to operate on different classes of solvers the \xQ{} metric must operate only on information available to all classes of solvers. Namely, the calculation of \xQ{} should only include as inputs: the problem definition, and solver parameters. The result should be some metric based on the resulting policy \policy. This approach is inspired by \cite{Leyton-Brown2009-yr} who were able to use `Empirical Hardness Models' (EHMs) to predict the empirical runtime performance of an algorithm on a problem with given features. Figures \ref{fig:sq_train}, and \ref{fig:sq_test} illustrate how \xQ{} can be calculated.
+Given the requirement to operate on different classes of solvers the \xQ{} metric must only utilize information available to all classes of solvers. Namely, the calculation of \xQ{} should only include as inputs: the problem definition, and solver parameters.
 
 As indicated in Fig. \ref{fig:sq_train} A surrogate model \surrogate{} is trained in order to predict the how \solvestar{} would perform on task \task; this is done by predicting \rwdstarapprox. As illustrated in Fig \ref{fig:sq_test} . The solver quality metric compares the reward distribution of the candidate solver to the predicted distribution of the trusted solver for a task.
 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.7\linewidth]{Figures/SQ_train.png}
+    \includegraphics[width=0.55\linewidth]{Figures/SQ_train.png}
     \caption{Figure displaying that \surrogate{} is use to predict a distribution  \rwdstariapprox{} that matches the first and second moments of \rwdstari}
     \label{fig:sq_train}
 \end{figure}%
@@ -18,9 +18,14 @@ As indicated in Fig. \ref{fig:sq_train} A surrogate model \surrogate{} is traine
 \end{figure}
 
 \subsection{Calculating \xQ}
-In order to calculate SQ we first quantify the `overlap' between the trusted distribution, and the candidate distribution, denoted as $T$ and $C$ respectively. This can be done by calculating the distance between two different distributions. There are several different distance metrics that can be used on statistical distributions, but the Hellinger metric is a type of `$f$-divergence', with $f=(\sqrt{t}-1)^2$.
+In order to calculate SQ the `overlap' between the trusted distribution and the candidate distribution, denoted as $T$ and $C$ respectively, must be quantified. This can be done by calculating the distance between two different distributions. There are several different distance metrics that can be used on statistical distributions, but the Hellinger metric is a type of `$f$-divergence', with $f=(\sqrt{t}-1)^2$.
 
-The Hellinger metric is more desirable than something like the KL divergence, because it qualifies as a distance. In other words:
+
+\begin{align}
+    H_{\mathcal{N}}^{2}(P,Q) = 1-\sqrt{\frac{2\sigma_1\sigma_2}{\sigma_1^2+\sigma_2^2}}\exp{\left(-\frac{1}{4}\frac{(\mu_1-\mu_2)^2}{\sigma_1^2+\sigma_2^2}\right)}
+\end{align}
+
+The Hellinger metric is more desirable than something like the KL divergence, because it qualifies as a distance. In other words if meets the following four criteria:
 
 \begin{enumerate}
     \item $d(P,Q) \geq 0$
@@ -30,10 +35,6 @@ The Hellinger metric is more desirable than something like the KL divergence, be
 \end{enumerate}
 
 The Hellinger metric is \emph{bounded} between 0 and 1, where 0 means the distributions are identical. The maximum distance, 1, is achieved when $P$ assigns zero probability at every point in which $Q$ assigns probability. The Hellinger distance is known for different kinds of analytical distributions. For the purposes of calculating SQ the form for two Normal distributions ($P \sim \mathcal{N}(\mu_1,\sigma_1), Q\sim\mathcal{N}(\mu_2,\sigma_2)$) is useful:
-
-\begin{align}
-    H_{\mathcal{N}}^{2}(P,Q) = 1-\sqrt{\frac{2\sigma_1\sigma_2}{\sigma_1^2+\sigma_2^2}}\exp{\left(-\frac{1}{4}\frac{(\mu_1-\mu_2)^2}{\sigma_1^2+\sigma_2^2}\right)}
-\end{align}
 
 When calculating SQ, we do not require Normal distributions. Rather, we only require that each distribution has a known mean, and variance. In essence, even though the distributions being compared may not be Normal, we are treating them as Normal by using the mean and standard deviation as their sufficient statistics.
 
@@ -110,10 +111,27 @@ Figure \ref{fig:sq_thry2} shows a cross-section of the graph at the correspondin
     \caption{example of expected rewards of solvers versus variation of a problem parameter}
     \label{fig:sq_thry1}
 \end{figure}
-
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.9\linewidth]{Figures/point_compare}
-    \caption{Plots depicting the distributions at each of the points indicated in \ref{fig:sq_thry1}. Solver quality (SQ) values are shown for several different values of the solver reward range $r$}
+    \includegraphics[width=0.9\linewidth]{Figures/p2}
+    \caption{example of expected rewards of solvers versus variation of a problem parameter}
     \label{fig:sq_thry2}
+\end{figure}
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figures/p3}
+    \caption{example of expected rewards of solvers versus variation of a problem parameter}
+    \label{fig:sq_thry3}
+\end{figure}
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figures/p4}
+    \caption{example of expected rewards of solvers versus variation of a problem parameter}
+    \label{fig:sq_thry4}
+\end{figure}
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figures/p5}
+    \caption{example of expected rewards of solvers versus variation of a problem parameter}
+    \label{fig:sq_thry5}
 \end{figure}

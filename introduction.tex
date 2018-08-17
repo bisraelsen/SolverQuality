@@ -39,8 +39,8 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
 \subsection{Factorized Machine Self-Confidence}
     \begin{figure*}[tbp]
         \centering
-        \includegraphics[width=0.65\linewidth]{Figures/SC_flowchart.pdf}
-        \caption{Factorized Machine Self-Confidence}
+        \includegraphics[width=0.55\linewidth]{Figures/FaMSeC.png}
+        \caption{Factorized Machine Self-Confidence (FaMSeC)}
         \label{fig:famsec}
     \end{figure*}
 
@@ -48,7 +48,7 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
 
     We define self-confidence to be: \textbf{An agent's perceived ability to achieve assigned goals (within a defined region of autonomous behavior) after accounting for (1) uncertainties in its knowledge of the world, (2) uncertainties of its own state, and (3) uncertainties about its reasoning process and execution abilities.}
 
-    The formal definition of self-confidence we use is from \cite{Aitken2016-cv}, wherein five factors that compose self confidence are defined. They are: \nisar{can add some more detail from proposals...}
+    The formal definition of self-confidence we use is from \cite{Aitken2016-cv}, wherein five factors that compose self confidence are defined. Figure \ref{fig:famsec} highlights at what point in a autonomous system's logic each of the factors originate. They are: \nisar{can add some more detail from proposals...}
 
         \begin{itemize}
             \item [\xH{}:] \textbf{Past Performance}---how well has autonomy done in similar circumstances?
@@ -58,33 +58,49 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
             \item [\xQ{}:] \textbf{Solver Quality}---How well can the solver use the model to generate policies/plans?
         \end{itemize}
 
-    Outcome assessment has been previously defined in \cite{Aitken2016-cv}, but has not yet been evaluated as an effective assurance as per the guidelines laid out in the work on assurances. Solver Quality is a metric that is, as yet, un-explored.
+    Self-confidence \xSC{} is a composite assurance that stems from some combination of these five factors. \xP{} has been previously defined in \cite{Aitken2016-cv}, but has not yet been evaluated as an effective assurance as per the guidelines laid out in the work on assurances. Herein \xQ{} is investigated.
 
 \subsection{Solver Quality (\xQ)} \label{sec:SQ}
-    The main aim of \xQ{} is to indicate how solver \solve{} will perform on a given (possibly un-encountered) task \task{}. The desiderata are:
+    The main aim of \xQ{} is to indicate how a solver \solve{} will perform on a given (possibly un-encountered) task \task{}. Formally, the desiderata are:
 
     \begin{enumerate}[label=\textbf{D\arabic*}]
-        \item enable comparison across solver classes \label{itm:d1}
-        \item reflect competence of solver \solve{} for task \task{} \label{itm:d2}
+        \item reflect competence of solver \solve{} for task \task{} \label{itm:d1}
+        \item enable comparison across solver classes \label{itm:d2}
         \item extend to unseen tasks \label{itm:d3}
     \end{enumerate}
+    
+    Evaluating the `quality' of something implies some kind of comparison is taking place. In this setting the desired comparison is between a `candidate solver' \solve{} and some reference solver. Ideally, the candidate solver could be compared to the exact solution, but there are three main challenges:
 
-    Solvers of all classes are similar in that they operate on a specified problem, and have defined solver parameters that govern their behavior, in order to produce a policy $\pi$ that is a mapping from states to actions. In order to evaluate the quality of some solver on a given task \task, we propose comparing the policy \policy{} produced by \solve{} on \task{} to a `ground truth' policy $\pi^*$ produced by a `trusted solver' \solvestar. This raises the question of how to compare policies; there are a few different approaches that present themselves:
-
-    \begin{enumerate}
-        \item Compare utilities at each state \label{itm:i1}
-        \begin{itemize}
-            \item Merits: Evaluates whether states have similar utilities, quick to calculate \brett{Why is it `quick to calculate', that doesn't seem very well supported}
-            \item Demerits: Does not apply to solvers that represent different amounts of the state-action space (i.e. exact versus approximate solvers), or to solvers that may represent the state-action space differently (i.e. meta-solvers). This approach does not satisfy \ref{itm:d1}.
-        \end{itemize} 
-        \item Compare `coverage' of the policy (here coverage refers to the proportion of the state space covered by the solver) \label{itm:i2}
-        \begin{itemize}
-            \item Merits: Evaluates how `thorough' the policy is, quick to calculate \brett{same as above}
-            \item Demerits: Does not meet \ref{itm:d1} because not all policies will have the same coverage by design. Also high coverage does not imply a `good' solution
-        \end{itemize}
-        \item Compare the reward distribution of given policies \label{itm:i3}
-        \begin{itemize}
-            \item Merits: Meets \ref{itm:d1}
-            \item Demerits: Expensive to calculate the reward distribution via many simulations
-        \end{itemize}
+    \begin{enumerate}[label=\textbf{C\arabic*}]
+        \item It is unclear how policies should be compared \label{itm:l1}
+        \item Exact solutions to most practical problems are infeasible due to large state-spaces \label{itm:l2}
+        \item Even if \ref{itm:l2} weren't an issue, it is generally impossible to evaluate the performance of any solver on \emph{all} possible problems \label{itm:l3}
     \end{enumerate}
+
+    \subsubsection{Addressing \ref{itm:l1}}
+        Solvers of all classes are similar in that they operate on a specified problem, and have defined solver parameters that govern their behavior, in order to produce a policy $\pi$ that is a mapping from states to actions. A few possibilities for comparing policies include:
+    
+        \begin{enumerate}
+            \item Compare utilities at each state \label{itm:i1}
+            \begin{itemize}
+                \item Merits: Evaluates whether states are assigned equal utility across solvers. Theoretically state utilities should be independent of the solver. Addresses \ref{itm:d1}
+                \item Demerits: Does not apply to solvers that represent different amounts of the state-action space (i.e. exact versus approximate solvers), or to solvers that may represent the state-action space differently (i.e. meta-solvers). This approach does not satisfy \ref{itm:d2}.
+            \end{itemize} 
+            \item Compare `coverage' of the policy (here coverage refers to the proportion of the state space considered by the solver) \label{itm:i2}
+            \begin{itemize}
+                \item Merits: Evaluates how `thorough' the policy is, in concert with \ref{itm:i1} could address \ref{itm:d1}
+                \item Demerits: Does not meet \ref{itm:d2} because not all policies will have the same coverage by design. Also high coverage does not imply a `good' solution
+            \end{itemize}
+            \item Compare the reward distribution of given policies \label{itm:i3}
+            \begin{itemize}
+                \item Merits: Meets \ref{itm:d1}, also able to satisfy \ref{itm:d2} as reward distributions can be simulated from any policy
+                \item Demerits: Expensive to calculate the reward distribution via many simulations
+            \end{itemize}
+        \end{enumerate}
+
+        Of the possibilities listed above, item \ref{itm:i3} will be used because only it is able to satisfy \ref{itm:d1} and \ref{itm:d2}.
+
+    \subsubsection{Addressing \ref{itm:l2}, and \ref{itm:l3}}
+        In order to address \ref{itm:l2} a `trusted solver' \solvestar{} could be introduced as the reference to which the candidate solver \solve{} can be compared. This solver need not be exact, but could be nearly so. Ultimately, \solvestar{} is only required to be a reference of some kind; it may be optimal, or it may be abysmal. In fact given a space of all possible unseen tasks of class $\text{some task class notation}$, \solvestar{} will likely be abysmal for some of them.
+
+        Still according to \ref{itm:l3} even a trusted solver does not have a known solution for all tasks of class $\text{task class notation}$. Literature on `Empirical Hardness Models' (EHMs) can be helpful here in confronting this challenge. In their work \cite{Leyton-Brown2009-yr,Hutter2009-og} introduced EHMs in order to predict the empirical runtime performance of an algorithm on a problem with given features. Applying similar logic in this domain, it should be possible to learn a surrogate model \surrogate{} that predicts the reward distribution \rwdstarapprox{} of the trusted solver \solvestar{} for a given task \task. In this way it is possible to estimate the performance of \solvestar{} on problems to which it has never been applied.

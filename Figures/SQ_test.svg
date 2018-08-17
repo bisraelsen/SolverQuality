@@ -11,8 +11,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="67.755913mm"
-   height="60.762253mm"
-   viewBox="0 0 67.755913 60.762253"
+   height="48.275547mm"
+   viewBox="0 0 67.755913 48.275547"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (unknown)"
@@ -28,15 +28,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.5625776"
-     inkscape:cx="96.755475"
+     inkscape:cx="96.755476"
      inkscape:cy="162.75661"
      inkscape:document-units="mm"
-     inkscape:current-layer="g32207"
+     inkscape:current-layer="layer4"
      showgrid="true"
      inkscape:window-width="1872"
-     inkscape:window-height="1030"
+     inkscape:window-height="1048"
      inkscape:window-x="0"
-     inkscape:window-y="18"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      showguides="true"
      inkscape:snap-object-midpoints="false"
@@ -59,8 +59,8 @@
      fit-margin-right="2"
      fit-margin-bottom="2">
     <inkscape:grid
-       originy="-95.393633"
-       originx="-42.701332"
+       originy="-95.393635"
+       originx="-42.701329"
        type="xygrid"
        id="grid1307" />
   </sodipodi:namedview>
@@ -575,7 +575,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-42.70134,-140.84412)">
+     transform="translate(-42.70134,-153.33083)">
     <g
        id="g15773"
        transform="translate(-6.6721694,-8.9958338)">
@@ -910,188 +910,6 @@
          inkscape:connector-curvature="0"
          inkscape:path-effect="#path-effect8458"
          inkscape:original-d="m 44.979166,193.8125 c 1.67353,-5.5e-4 3.346509,-5.5e-4 5.018936,0 1.039559,-0.93756 2.079252,-1.87519 3.118051,-2.81196 0.861972,-1.85007 1.724351,-3.70165 2.585699,-5.55165 0.862143,-0.88748 1.724352,-1.77505 2.585701,-2.66175 0.963244,0.86081 1.927151,1.72325 2.8899,2.5857 0.913121,1.84994 1.825751,3.70055 2.7378,5.55165 0.913262,0.96224 1.825751,1.92479 2.7378,2.88801 1.85113,8e-5 3.701652,-5.5e-4 5.55165,0" />
-    </g>
-    <g
-       transform="translate(7.683791,14.816671)"
-       id="g22477">
-      <rect
-         ry="0.99219114"
-         y="131.25552"
-         x="50.542847"
-         height="2.9765625"
-         width="2.9765625"
-         id="rect9271"
-         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <g
-         id="g9583"
-         ns1:jacobian_sqrt="0.317226"
-         ns1:alignment="middle center"
-         ns1:scale="0.899221663482"
-         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
-         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$1$\n\\end{quote}"
-         ns1:pdfconverter="pdf2svg"
-         ns1:texconverter="pdflatex"
-         ns1:version="0.8.0"
-         transform="matrix(0.2379195,0,0,0.2379195,-20.692357,101.47056)">
-        <g
-           id="g9581">
-          <g
-             id="g9579"
-             style="fill:#000000;fill-opacity:1">
-            <path
-               id="path9577"
-               transform="translate(303.133,134.765)"
-               d="m 2.9375,-6.375 c 0,-0.25 0,-0.265625 -0.234375,-0.265625 C 2.078125,-6 1.203125,-6 0.890625,-6 v 0.3125 c 0.203125,0 0.78125,0 1.296875,-0.265625 v 5.171875 c 0,0.359375 -0.03125,0.46875 -0.921875,0.46875 h -0.3125 V 0 c 0.34375,-0.03125 1.203125,-0.03125 1.609375,-0.03125 0.390625,0 1.265625,0 1.609375,0.03125 v -0.3125 h -0.3125 c -0.90625,0 -0.921875,-0.109375 -0.921875,-0.46875 z m 0,0"
-               style="stroke:none;stroke-width:0"
-               inkscape:connector-curvature="0" />
-          </g>
-        </g>
-      </g>
-      <rect
-         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="rect9805"
-         width="2.9765625"
-         height="2.9765625"
-         x="56.099102"
-         y="130.46179"
-         ry="0.99219114" />
-      <rect
-         ry="0.99219114"
-         y="135.22423"
-         x="55.305351"
-         height="2.9765625"
-         width="2.9765625"
-         id="rect9815"
-         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <rect
-         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-         id="rect9835"
-         width="2.9765625"
-         height="2.9765625"
-         x="50.145969"
-         y="135.62109"
-         ry="0.99219114" />
-      <g
-         transform="matrix(0.2379195,0,0,0.2379195,-21.07808,105.8362)"
-         ns1:version="0.8.0"
-         ns1:texconverter="pdflatex"
-         ns1:pdfconverter="pdf2svg"
-         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$2$\n\\end{quote}"
-         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
-         ns1:scale="0.899221663482"
-         ns1:alignment="middle center"
-         ns1:jacobian_sqrt="0.317226"
-         id="g10081">
-        <g
-           id="g10079">
-          <g
-             style="fill:#000000;fill-opacity:1"
-             id="g10077">
-            <path
-               inkscape:connector-curvature="0"
-               style="stroke:none;stroke-width:0"
-               d="m 1.265625,-0.765625 1.0625,-1.03125 c 1.546875,-1.375 2.140625,-1.90625 2.140625,-2.90625 0,-1.140625 -0.890625,-1.9375 -2.109375,-1.9375 -1.125,0 -1.859375,0.921875 -1.859375,1.8125 0,0.546875 0.5,0.546875 0.53125,0.546875 0.171875,0 0.515625,-0.109375 0.515625,-0.53125 0,-0.25 -0.1875,-0.515625 -0.53125,-0.515625 -0.078125,0 -0.09375,0 -0.125,0.015625 0.21875,-0.65625 0.765625,-1.015625 1.34375,-1.015625 0.90625,0 1.328125,0.8125 1.328125,1.625 C 3.5625,-3.90625 3.078125,-3.125 2.515625,-2.5 l -1.90625,2.125 C 0.5,-0.265625 0.5,-0.234375 0.5,0 H 4.203125 L 4.46875,-1.734375 H 4.234375 C 4.171875,-1.4375 4.109375,-1 4,-0.84375 3.9375,-0.765625 3.28125,-0.765625 3.0625,-0.765625 Z m 0,0"
-               transform="translate(303.133,134.765)"
-               id="path10075" />
-          </g>
-        </g>
-      </g>
-      <g
-         id="g10555"
-         ns1:jacobian_sqrt="0.317226"
-         ns1:alignment="middle center"
-         ns1:scale="0.899221663482"
-         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
-         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$4$\n\\end{quote}"
-         ns1:pdfconverter="pdf2svg"
-         ns1:texconverter="pdflatex"
-         ns1:version="0.8.0"
-         transform="matrix(0.2379195,0,0,0.2379195,-15.124951,100.68982)">
-        <g
-           id="g10553">
-          <g
-             id="g10551"
-             style="fill:#000000;fill-opacity:1">
-            <path
-               id="path10549"
-               transform="translate(303.133,134.765)"
-               d="m 2.9375,-1.640625 v 0.859375 c 0,0.359375 -0.03125,0.46875 -0.765625,0.46875 H 1.96875 V 0 C 2.375,-0.03125 2.890625,-0.03125 3.3125,-0.03125 c 0.421875,0 0.9375,0 1.359375,0.03125 v -0.3125 h -0.21875 c -0.734375,0 -0.75,-0.109375 -0.75,-0.46875 V -1.640625 H 4.6875 v -0.3125 H 3.703125 v -4.53125 c 0,-0.203125 0,-0.265625 -0.171875,-0.265625 -0.078125,0 -0.109375,0 -0.1875,0.125 l -3.0625,4.671875 v 0.3125 z m 0.046875,-0.3125 H 0.5625 l 2.421875,-3.71875 z m 0,0"
-               style="stroke:none;stroke-width:0"
-               inkscape:connector-curvature="0" />
-          </g>
-        </g>
-      </g>
-      <g
-         transform="matrix(0.2379195,0,0,0.2379195,-15.920561,105.4133)"
-         ns1:version="0.8.0"
-         ns1:texconverter="pdflatex"
-         ns1:pdfconverter="pdf2svg"
-         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$3$\n\\end{quote}"
-         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
-         ns1:scale="0.899221663482"
-         ns1:alignment="middle center"
-         ns1:jacobian_sqrt="0.317226"
-         id="g11029">
-        <g
-           id="g11027">
-          <g
-             style="fill:#000000;fill-opacity:1"
-             id="g11025">
-            <path
-               inkscape:connector-curvature="0"
-               style="stroke:none;stroke-width:0"
-               d="m 2.890625,-3.515625 c 0.8125,-0.265625 1.390625,-0.953125 1.390625,-1.75 0,-0.8125 -0.875,-1.375 -1.828125,-1.375 -1,0 -1.765625,0.59375 -1.765625,1.359375 0,0.328125 0.21875,0.515625 0.515625,0.515625 0.296875,0 0.5,-0.21875 0.5,-0.515625 0,-0.484375 -0.46875,-0.484375 -0.609375,-0.484375 0.296875,-0.5 0.953125,-0.625 1.3125,-0.625 0.421875,0 0.96875,0.21875 0.96875,1.109375 0,0.125 -0.03125,0.703125 -0.28125,1.140625 C 2.796875,-3.65625 2.453125,-3.625 2.203125,-3.625 2.125,-3.609375 1.890625,-3.59375 1.8125,-3.59375 c -0.078125,0.015625 -0.140625,0.03125 -0.140625,0.125 0,0.109375 0.0625,0.109375 0.234375,0.109375 h 0.4375 c 0.8125,0 1.1875,0.671875 1.1875,1.65625 0,1.359375 -0.6875,1.640625 -1.125,1.640625 -0.4375,0 -1.1875,-0.171875 -1.53125,-0.75 0.34375,0.046875 0.65625,-0.171875 0.65625,-0.546875 0,-0.359375 -0.265625,-0.5625 -0.546875,-0.5625 -0.25,0 -0.5625,0.140625 -0.5625,0.578125 0,0.90625 0.921875,1.5625 2.015625,1.5625 1.21875,0 2.125,-0.90625 2.125,-1.921875 0,-0.8125 -0.640625,-1.59375 -1.671875,-1.8125 z m 0,0"
-               transform="translate(303.133,134.765)"
-               id="path11023" />
-          </g>
-        </g>
-      </g>
-      <g
-         transform="matrix(0.23792,0,0,0.23792,-25.5285,102.72305)"
-         ns1:version="0.8.0"
-         ns1:texconverter="pdflatex"
-         ns1:pdfconverter="pdf2svg"
-         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n\\task\n\\end{quote}"
-         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
-         ns1:scale="0.674416247612"
-         ns1:alignment="middle center"
-         inkscapeversion="0.92.3"
-         ns1:jacobian_sqrt="0.23792"
-         id="g40327">
-        <g
-           id="g40325">
-          <g
-             style="fill:#000000;fill-opacity:1"
-             id="g40323">
-            <path
-               inkscape:connector-curvature="0"
-               style="stroke:none;stroke-width:0"
-               d="M 4.84375,-6.1875 H 6.5 c 1.3125,0 1.8125,-0.765625 1.8125,-0.890625 0,-0.046875 -0.03125,-0.0625 -0.09375,-0.0625 -0.109375,0 -0.359375,0.09375 -0.609375,0.265625 C 7.53125,-6.8125 7.5,-6.8125 7.3125,-6.8125 H 2.953125 c -1.234375,0 -2.609375,1.078125 -2.609375,1.890625 0,0.0625 0,0.109375 0.078125,0.109375 0.234375,0 0.859375,-0.328125 0.890625,-0.5625 0,-0.171875 0.015625,-0.359375 0.21875,-0.609375 0.109375,-0.125 0.1875,-0.203125 0.625,-0.203125 h 1.984375 c -0.171875,0.109375 -0.21875,0.25 -0.234375,0.359375 L 2.765625,-1.3125 C 2.65625,-0.828125 2.4375,-0.203125 2.15625,0.453125 2.09375,0.5625 2.09375,0.59375 2.09375,0.609375 c 0,0.0625 0.046875,0.0625 0.09375,0.0625 0.1875,0 0.6875,-0.265625 0.828125,-0.46875 0.0625,-0.109375 0.5,-1.125 0.71875,-1.953125 z m 0,0"
-               transform="translate(301.645,134.765)"
-               id="path40321" />
-          </g>
-        </g>
-      </g>
-      <path
-         inkscape:connector-curvature="0"
-         id="path2484"
-         d="M 53.519407,132.7438 56.0991,131.95007"
-         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path2486"
-         d="m 57.587381,133.43835 -0.79375,1.78587"
-         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path2488"
-         d="m 55.30535,136.71251 -2.182818,0.39686"
-         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path2490"
-         d="m 52.031126,134.23208 -0.396875,1.38901"
-         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
     <g
        transform="translate(-39.158352,-8.9958338)"
@@ -1467,9 +1285,198 @@
        id="path1725"
        d="m 92.920177,174.03132 v 3.18942 h -16.11645"
        style="fill:none;stroke:#000000;stroke-width:0.25508732px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Nets"
+     style="display:none"
+     transform="translate(3.8568001e-7,-12.486706)">
+    <g
+       transform="translate(-35.017549,-126.02745)"
+       id="g22477">
+      <rect
+         ry="0.99219114"
+         y="131.25552"
+         x="50.542847"
+         height="2.9765625"
+         width="2.9765625"
+         id="rect9271"
+         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <g
+         id="g9583"
+         ns1:jacobian_sqrt="0.317226"
+         ns1:alignment="middle center"
+         ns1:scale="0.899221663482"
+         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
+         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$1$\n\\end{quote}"
+         ns1:pdfconverter="pdf2svg"
+         ns1:texconverter="pdflatex"
+         ns1:version="0.8.0"
+         transform="matrix(0.2379195,0,0,0.2379195,-20.692357,101.47056)">
+        <g
+           id="g9581">
+          <g
+             id="g9579"
+             style="fill:#000000;fill-opacity:1">
+            <path
+               id="path9577"
+               transform="translate(303.133,134.765)"
+               d="m 2.9375,-6.375 c 0,-0.25 0,-0.265625 -0.234375,-0.265625 C 2.078125,-6 1.203125,-6 0.890625,-6 v 0.3125 c 0.203125,0 0.78125,0 1.296875,-0.265625 v 5.171875 c 0,0.359375 -0.03125,0.46875 -0.921875,0.46875 h -0.3125 V 0 c 0.34375,-0.03125 1.203125,-0.03125 1.609375,-0.03125 0.390625,0 1.265625,0 1.609375,0.03125 v -0.3125 h -0.3125 c -0.90625,0 -0.921875,-0.109375 -0.921875,-0.46875 z m 0,0"
+               style="stroke:none;stroke-width:0"
+               inkscape:connector-curvature="0" />
+          </g>
+        </g>
+      </g>
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect9805"
+         width="2.9765625"
+         height="2.9765625"
+         x="56.099102"
+         y="130.46179"
+         ry="0.99219114" />
+      <rect
+         ry="0.99219114"
+         y="135.22423"
+         x="55.305351"
+         height="2.9765625"
+         width="2.9765625"
+         id="rect9815"
+         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.19874999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="rect9835"
+         width="2.9765625"
+         height="2.9765625"
+         x="50.145969"
+         y="135.62109"
+         ry="0.99219114" />
+      <g
+         transform="matrix(0.2379195,0,0,0.2379195,-21.07808,105.8362)"
+         ns1:version="0.8.0"
+         ns1:texconverter="pdflatex"
+         ns1:pdfconverter="pdf2svg"
+         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$2$\n\\end{quote}"
+         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
+         ns1:scale="0.899221663482"
+         ns1:alignment="middle center"
+         ns1:jacobian_sqrt="0.317226"
+         id="g10081">
+        <g
+           id="g10079">
+          <g
+             style="fill:#000000;fill-opacity:1"
+             id="g10077">
+            <path
+               inkscape:connector-curvature="0"
+               style="stroke:none;stroke-width:0"
+               d="m 1.265625,-0.765625 1.0625,-1.03125 c 1.546875,-1.375 2.140625,-1.90625 2.140625,-2.90625 0,-1.140625 -0.890625,-1.9375 -2.109375,-1.9375 -1.125,0 -1.859375,0.921875 -1.859375,1.8125 0,0.546875 0.5,0.546875 0.53125,0.546875 0.171875,0 0.515625,-0.109375 0.515625,-0.53125 0,-0.25 -0.1875,-0.515625 -0.53125,-0.515625 -0.078125,0 -0.09375,0 -0.125,0.015625 0.21875,-0.65625 0.765625,-1.015625 1.34375,-1.015625 0.90625,0 1.328125,0.8125 1.328125,1.625 C 3.5625,-3.90625 3.078125,-3.125 2.515625,-2.5 l -1.90625,2.125 C 0.5,-0.265625 0.5,-0.234375 0.5,0 H 4.203125 L 4.46875,-1.734375 H 4.234375 C 4.171875,-1.4375 4.109375,-1 4,-0.84375 3.9375,-0.765625 3.28125,-0.765625 3.0625,-0.765625 Z m 0,0"
+               transform="translate(303.133,134.765)"
+               id="path10075" />
+          </g>
+        </g>
+      </g>
+      <g
+         id="g10555"
+         ns1:jacobian_sqrt="0.317226"
+         ns1:alignment="middle center"
+         ns1:scale="0.899221663482"
+         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
+         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$4$\n\\end{quote}"
+         ns1:pdfconverter="pdf2svg"
+         ns1:texconverter="pdflatex"
+         ns1:version="0.8.0"
+         transform="matrix(0.2379195,0,0,0.2379195,-15.124951,100.68982)">
+        <g
+           id="g10553">
+          <g
+             id="g10551"
+             style="fill:#000000;fill-opacity:1">
+            <path
+               id="path10549"
+               transform="translate(303.133,134.765)"
+               d="m 2.9375,-1.640625 v 0.859375 c 0,0.359375 -0.03125,0.46875 -0.765625,0.46875 H 1.96875 V 0 C 2.375,-0.03125 2.890625,-0.03125 3.3125,-0.03125 c 0.421875,0 0.9375,0 1.359375,0.03125 v -0.3125 h -0.21875 c -0.734375,0 -0.75,-0.109375 -0.75,-0.46875 V -1.640625 H 4.6875 v -0.3125 H 3.703125 v -4.53125 c 0,-0.203125 0,-0.265625 -0.171875,-0.265625 -0.078125,0 -0.109375,0 -0.1875,0.125 l -3.0625,4.671875 v 0.3125 z m 0.046875,-0.3125 H 0.5625 l 2.421875,-3.71875 z m 0,0"
+               style="stroke:none;stroke-width:0"
+               inkscape:connector-curvature="0" />
+          </g>
+        </g>
+      </g>
+      <g
+         transform="matrix(0.2379195,0,0,0.2379195,-15.920561,105.4133)"
+         ns1:version="0.8.0"
+         ns1:texconverter="pdflatex"
+         ns1:pdfconverter="pdf2svg"
+         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n$3$\n\\end{quote}"
+         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
+         ns1:scale="0.899221663482"
+         ns1:alignment="middle center"
+         ns1:jacobian_sqrt="0.317226"
+         id="g11029">
+        <g
+           id="g11027">
+          <g
+             style="fill:#000000;fill-opacity:1"
+             id="g11025">
+            <path
+               inkscape:connector-curvature="0"
+               style="stroke:none;stroke-width:0"
+               d="m 2.890625,-3.515625 c 0.8125,-0.265625 1.390625,-0.953125 1.390625,-1.75 0,-0.8125 -0.875,-1.375 -1.828125,-1.375 -1,0 -1.765625,0.59375 -1.765625,1.359375 0,0.328125 0.21875,0.515625 0.515625,0.515625 0.296875,0 0.5,-0.21875 0.5,-0.515625 0,-0.484375 -0.46875,-0.484375 -0.609375,-0.484375 0.296875,-0.5 0.953125,-0.625 1.3125,-0.625 0.421875,0 0.96875,0.21875 0.96875,1.109375 0,0.125 -0.03125,0.703125 -0.28125,1.140625 C 2.796875,-3.65625 2.453125,-3.625 2.203125,-3.625 2.125,-3.609375 1.890625,-3.59375 1.8125,-3.59375 c -0.078125,0.015625 -0.140625,0.03125 -0.140625,0.125 0,0.109375 0.0625,0.109375 0.234375,0.109375 h 0.4375 c 0.8125,0 1.1875,0.671875 1.1875,1.65625 0,1.359375 -0.6875,1.640625 -1.125,1.640625 -0.4375,0 -1.1875,-0.171875 -1.53125,-0.75 0.34375,0.046875 0.65625,-0.171875 0.65625,-0.546875 0,-0.359375 -0.265625,-0.5625 -0.546875,-0.5625 -0.25,0 -0.5625,0.140625 -0.5625,0.578125 0,0.90625 0.921875,1.5625 2.015625,1.5625 1.21875,0 2.125,-0.90625 2.125,-1.921875 0,-0.8125 -0.640625,-1.59375 -1.671875,-1.8125 z m 0,0"
+               transform="translate(303.133,134.765)"
+               id="path11023" />
+          </g>
+        </g>
+      </g>
+      <g
+         transform="matrix(0.23792,0,0,0.23792,-25.5285,102.72305)"
+         ns1:version="0.8.0"
+         ns1:texconverter="pdflatex"
+         ns1:pdfconverter="pdf2svg"
+         ns1:text="\\newcommand{\\solve}{$\\mathcal{S}$}\n\\newcommand{\\solvestar}{$\\mathcal{S}^*$}\n\\newcommand{\\task}{$\\mathcal{T}$}\n\\newcommand{\\taski}{$\\mathcal{T}_i$}\n\\newcommand{\\rwd}{$\\mathcal{R}$}\n\\newcommand{\\rwdstar}{$\\mathcal{R}^*$}\n\\newcommand{\\policy}{$\\mathcal{\\pi}$}\n\\newcommand{\\policystar}{$\\mathcal{\\pi}^*$}\n\\newcommand{\\surrogate}{$\\mathcal{M}^*(\\mathcal{T})$}\n\\newcommand{\\xQ}{$x_Q$}\n\\newcommand{\\xP}{$x_P$}\n\\newcommand{\\xH}{$x_H$}\n\\newcommand{\\xI}{$x_I$}\n\\newcommand{\\xM}{$x_M$}\n\n\\begin{quote}\n\\centering\n\\task\n\\end{quote}"
+         ns1:preamble="/home/brett/.config/inkscape/extensions/default_packages.tex"
+         ns1:scale="0.674416247612"
+         ns1:alignment="middle center"
+         inkscapeversion="0.92.3"
+         ns1:jacobian_sqrt="0.23792"
+         id="g40327">
+        <g
+           id="g40325">
+          <g
+             style="fill:#000000;fill-opacity:1"
+             id="g40323">
+            <path
+               inkscape:connector-curvature="0"
+               style="stroke:none;stroke-width:0"
+               d="M 4.84375,-6.1875 H 6.5 c 1.3125,0 1.8125,-0.765625 1.8125,-0.890625 0,-0.046875 -0.03125,-0.0625 -0.09375,-0.0625 -0.109375,0 -0.359375,0.09375 -0.609375,0.265625 C 7.53125,-6.8125 7.5,-6.8125 7.3125,-6.8125 H 2.953125 c -1.234375,0 -2.609375,1.078125 -2.609375,1.890625 0,0.0625 0,0.109375 0.078125,0.109375 0.234375,0 0.859375,-0.328125 0.890625,-0.5625 0,-0.171875 0.015625,-0.359375 0.21875,-0.609375 0.109375,-0.125 0.1875,-0.203125 0.625,-0.203125 h 1.984375 c -0.171875,0.109375 -0.21875,0.25 -0.234375,0.359375 L 2.765625,-1.3125 C 2.65625,-0.828125 2.4375,-0.203125 2.15625,0.453125 2.09375,0.5625 2.09375,0.59375 2.09375,0.609375 c 0,0.0625 0.046875,0.0625 0.09375,0.0625 0.1875,0 0.6875,-0.265625 0.828125,-0.46875 0.0625,-0.109375 0.5,-1.125 0.71875,-1.953125 z m 0,0"
+               transform="translate(301.645,134.765)"
+               id="path40321" />
+          </g>
+        </g>
+      </g>
+      <path
+         inkscape:connector-curvature="0"
+         id="path2484"
+         d="M 53.519407,132.7438 56.0991,131.95007"
+         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2486"
+         d="m 57.587381,133.43835 -0.79375,1.78587"
+         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2488"
+         d="m 55.30535,136.71251 -2.182818,0.39686"
+         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2490"
+         d="m 52.031126,134.23208 -0.396875,1.38901"
+         style="fill:none;stroke:#000000;stroke-width:0.12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
     <g
        id="g8546"
-       transform="translate(-1.5945538,23.81251)">
+       transform="translate(-44.295893,-117.03161)">
       <circle
          style="fill:none;stroke:#000000;stroke-width:0.075;stroke-miterlimit:4;stroke-dasharray:0.075, 0.075;stroke-dashoffset:0;stroke-opacity:1"
          id="circle23435"
