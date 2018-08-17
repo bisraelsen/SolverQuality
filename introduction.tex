@@ -69,17 +69,17 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
         \item extend to unseen tasks \label{itm:d3}
     \end{enumerate}
 
-    Solvers of all classes are similar in that they operate on a specified problem, and have defined solver parameters that govern their behavior, in order to produce a policy $\pi$ that is a mapping from states to actions. In order to evaluate the quality of some solver on a given task \task, we propose comparing the policy \policy{} produced by \solver{} on \task{} to a `ground truth' policy $\pi^*$. This raises the question of how to compare policies. There are a few different approaches that present themselves:
+    Solvers of all classes are similar in that they operate on a specified problem, and have defined solver parameters that govern their behavior, in order to produce a policy $\pi$ that is a mapping from states to actions. In order to evaluate the quality of some solver on a given task \task, we propose comparing the policy \policy{} produced by \solve{} on \task{} to a `ground truth' policy $\pi^*$ produced by a `trusted solver' \solvestar. This raises the question of how to compare policies; there are a few different approaches that present themselves:
 
     \begin{enumerate}
         \item Compare utilities at each state \label{itm:i1}
         \begin{itemize}
-            \item Merits: Evaluates whether states have similar utilities, quick to calculate
+            \item Merits: Evaluates whether states have similar utilities, quick to calculate \brett{Why is it `quick to calculate', that doesn't seem very well supported}
             \item Demerits: Does not apply to solvers that represent different amounts of the state-action space (i.e. exact versus approximate solvers), or to solvers that may represent the state-action space differently (i.e. meta-solvers). This approach does not satisfy \ref{itm:d1}.
         \end{itemize} 
-        \item Compare `coverage' of the policy \label{itm:i2}
+        \item Compare `coverage' of the policy (here coverage refers to the proportion of the state space covered by the solver) \label{itm:i2}
         \begin{itemize}
-            \item Merits: Evaluates how `thorough' the policy is, quick to calculate
+            \item Merits: Evaluates how `thorough' the policy is, quick to calculate \brett{same as above}
             \item Demerits: Does not meet \ref{itm:d1} because not all policies will have the same coverage by design. Also high coverage does not imply a `good' solution
         \end{itemize}
         \item Compare the reward distribution of given policies \label{itm:i3}
@@ -88,21 +88,3 @@ We can choose `archival' or `non-archival'. I think we probably want to do archi
             \item Demerits: Expensive to calculate the reward distribution via many simulations
         \end{itemize}
     \end{enumerate}
-    
-    Given the requirement to operate on different classes of solvers the \xQ{} metric must operate only on information available to all classes of solvers. Namely, \xQ{} should take as inputs: the problem definition, and solver parameters. The result should be some metric based on the resulting policy \policy. This approach is inspired by \cite{Leyton-Brown2009-yr} who were able to use `Empirical Hardness Models' (EHMs) to predict the empirical runtime performance of an algorithm on a problem with given features. Figure~\ref{fig:SQ_flowchart} illustrates how this might work for \xQ{} as an assurance.
-
-    A model is trained in order to predict sufficient statistics of the trusted, or reference, solver \solvestar{} on different (but similar) tasks. The solver quality metric compares the reward distribution of the candidate solver to the predicted distribution of the trusted solver for a task.
-
-    \begin{figure}[tbp]
-        \centering
-        \includegraphics[width=0.7\linewidth]{Figures/SQ_train.png}
-        \caption{Figure displaying that \surrogate{} is use to predict a distribution  \rwdstariapprox{} that matches the first and second moments of \rwdstari}
-        \label{fig:sq_train}
-    \end{figure}%
-
-    \begin{figure}[tbp]
-        \centering
-        \includegraphics[width=0.6\linewidth]{Figures/SQ_test.png}
-        \caption{During testing \surrogate{} is used to predict \rwdstarapprox{}, \xQ{} is then calculated using \rwd{}.}
-        \label{fig:sq_train}
-    \end{figure}

@@ -1,5 +1,23 @@
 \section{Methodology}
-\subsection{Calculating SQ}
+Given the requirement to operate on different classes of solvers the \xQ{} metric must operate only on information available to all classes of solvers. Namely, the calculation of \xQ{} should only include as inputs: the problem definition, and solver parameters. The result should be some metric based on the resulting policy \policy. This approach is inspired by \cite{Leyton-Brown2009-yr} who were able to use `Empirical Hardness Models' (EHMs) to predict the empirical runtime performance of an algorithm on a problem with given features. Figures \ref{fig:sq_train}, and \ref{fig:sq_test} illustrate how \xQ{} can be calculated.
+
+As indicated in Fig. \ref{fig:sq_train} A surrogate model \surrogate{} is trained in order to predict the how \solvestar{} would perform on task \task; this is done by predicting \rwdstarapprox. As illustrated in Fig \ref{fig:sq_test} . The solver quality metric compares the reward distribution of the candidate solver to the predicted distribution of the trusted solver for a task.
+
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Figures/SQ_train.png}
+    \caption{Figure displaying that \surrogate{} is use to predict a distribution  \rwdstariapprox{} that matches the first and second moments of \rwdstari}
+    \label{fig:sq_train}
+\end{figure}%
+
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Figures/SQ_test.png}
+    \caption{During testing \surrogate{} is used to predict \rwdstarapprox{}, \xQ{} is then calculated using \rwd{}.}
+    \label{fig:sq_test}
+\end{figure}
+
+\subsection{Calculating \xQ}
 In order to calculate SQ we first quantify the `overlap' between the trusted distribution, and the candidate distribution, denoted as $T$ and $C$ respectively. This can be done by calculating the distance between two different distributions. There are several different distance metrics that can be used on statistical distributions, but the Hellinger metric is a type of `$f$-divergence', with $f=(\sqrt{t}-1)^2$.
 
 The Hellinger metric is more desirable than something like the KL divergence, because it qualifies as a distance. In other words:
@@ -55,7 +73,7 @@ The exponent $\alpha$ is a parameter that affects the influence that $f$ has wit
     \label{fig:alphas}
 \end{figure}
 
-While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Equation \ref{eq:f} is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep SQ value within some range and avoid arbitrarily large values that can be confusing to users. The general logistic equation is useful for this:
+While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Eq. \ref{eq:f} is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep SQ value within some range and avoid arbitrarily large values that can be confusing to users. The general logistic equation is useful for this:
 
 \begin{align}
     y &= \frac{L}{1+exp(-k(x-x_0))} \label{eq:get_log}
@@ -63,7 +81,7 @@ While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Equ
 
 We use $L=2$ so that when $s=0$ (distributions are identical) SQ will be 1. The parameter $k$ is selected to be $5$ so that SQ `saturates' at around $SQ=\pm1$ (see Figure \ref{fig:log_sat}).
 \begin{align}
-    \text{SQ} &= \frac{2}{1+exp(-\text{sq}/5)}\label{eq:SQ}
+    x_{Q} &= \frac{2}{1+exp(-\text{sq}/5)}\label{eq:SQ}
 \end{align}
 \begin{figure*}[tbp]
     \centering
