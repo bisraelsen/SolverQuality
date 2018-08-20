@@ -1,68 +1,77 @@
 \section{Methodology}
-Given the requirement to operate on different classes of solvers the \xQ{} metric must only utilize information available to all classes of solvers. Namely, the calculation of \xQ{} should only include as inputs: the problem definition, and solver parameters.
+How, then, can \xQ{} be calculated? Following from discussion in the previous section a surrogate model, \surrogate{}, can be learned to predict the reward distribution \rwdstarapprox{} of the trusted reference solver \solvestar{} on task \task{}. Figure \ref{fig:sq_train} depicts how the surrogate model is trained. Learning \surrogate{} would typically be done `offline' when more computation power and time are available.
 
-As indicated in Fig. \ref{fig:sq_train} A surrogate model \surrogate{} is trained in order to predict the how \solvestar{} would perform on task \task; this is done by predicting \rwdstarapprox. As illustrated in Fig \ref{fig:sq_test} . The solver quality metric compares the reward distribution of the candidate solver to the predicted distribution of the trusted solver for a task.
+As the human-robot team encounter a real task the candidate solver \solve{} must be evaluated w.r.t. the trusted solver \solvestar{}. This is done by comparing \rwdstarapprox{} (the predicted performance of \solvestar{} on task \task) and \rwd{} (the simulated performance of solver \solve{} on task \task). Figure \ref{fig:sq_test} depicts this procedure.
 
-\begin{figure}[tbp]
+Figure \ref{fig:sq_v2} is a conceptual figure illustrating some of the key components involved in calculating \xQ. The basic premise is simple: \emph{find the difference between the trusted solver ($T$) and the candidate solver ($C$) while taking into account which solver has the `better' expected reward as well as the overall `global range' of the trusted solver}.
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{build/sq_v2_fig}
+    \caption{Figure that graphically depicts the key values involved in calculating \xQ. Here $x$ represents a `parameter of interest' of task \task.}
+    \label{fig:sq_v2}
+\end{figure}
+
+\begin{figure}[tb]
     \centering
     \includegraphics[width=0.55\linewidth]{Figures/SQ_train.png}
     \caption{Figure displaying that \surrogate{} is use to predict a distribution  \rwdstariapprox{} that matches the first and second moments of \rwdstari}
     \label{fig:sq_train}
 \end{figure}%
 
-\begin{figure}[tbp]
+\begin{figure}[tb]
     \centering
     \includegraphics[width=0.6\linewidth]{Figures/SQ_test.png}
     \caption{During testing \surrogate{} is used to predict \rwdstarapprox{}, \xQ{} is then calculated using \rwd{}.}
     \label{fig:sq_test}
 \end{figure}
 
-\subsection{Calculating \xQ}
-In order to calculate SQ the `overlap' between the trusted distribution and the candidate distribution, denoted as $T$ and $C$ respectively, must be quantified. This can be done by calculating the distance between two different distributions. There are several different distance metrics that can be used on statistical distributions, but the Hellinger metric is a type of `$f$-divergence', with $f=(\sqrt{t}-1)^2$.
+\subsection{Learning \surrogate}
+The surrogate model \surrogate{} can be any model capable of predicting \rwdstarapprox{} given \task. In the formulation presented above \rwdstariapprox{} only represents the mean and standard deviation for \rwdstari{} (this makes the learning problem less complicated, but is not necessary).
 
+\subsection{Calculating \xQ}
+In order to compare two solvers we compare the resultant reward distributions each of those solvers produce (as stated in Sec.~\ref{sec:compare_policies}. If two solvers produce an identical reward distribution for a given task, then they can be considered equal in their `quality'. Conversely, if the two distributions are very different (for the same task) then their quality is also different.
+
+\subsubsection{Hellinger Metric} \label{sec:hellinger}
+Perhaps the easiest way of calculating this quantity is to find the `distance' between the two distributions. The Hellinger metric quantifies the distance between two distributions, and is \emph{bounded} between 0 and 1, where 0 means the distributions are identical. The maximum distance, 1, is achieved when distribution $P$ assigns zero probability at every point in which distribution $Q$ assigns probability.  The Hellinger distance has different forms based on the kind of analytical distribution being compared. For the purposes of calculating \xQ{} the from for two Normal distributions ($P \sim \mathcal{N}(\mu_1,\sigma_1), Q\sim\mathcal{N}(\mu_2,\sigma_2)$) is useful:
+
+% The Hellinger metric is more desirable than something like the KL divergence, because it qualifies as a distance. In other words it meets the following four criteria:
+%
+% \begin{enumerate}
+    % \item $d(P,Q) \geq 0$
+    % \item $d(P,Q) = 0 \implies P=Q$
+    % \item $d(P,Q) = d(Q,P)$
+    % \item $d(P,R) \leq d(P,Q) + d(Q,R)$
+% \end{enumerate}
 
 \begin{align}
-    H_{\mathcal{N}}^{2}(P,Q) = 1-\sqrt{\frac{2\sigma_1\sigma_2}{\sigma_1^2+\sigma_2^2}}\exp{\left(-\frac{1}{4}\frac{(\mu_1-\mu_2)^2}{\sigma_1^2+\sigma_2^2}\right)}
+    H_{\mathcal{N}}^{2}(P,Q) = 1-\sqrt{\frac{2\sigma_P\sigma_Q}{\sigma_P^2+\sigma_Q^2}}\exp{\left(-\frac{1}{4}\frac{(\mu_P-\mu_Q)^2}{\sigma_P^2+\sigma_Q^2}\right)}
 \end{align}
 
-The Hellinger metric is more desirable than something like the KL divergence, because it qualifies as a distance. In other words if meets the following four criteria:
-
-\begin{enumerate}
-    \item $d(P,Q) \geq 0$
-    \item $d(P,Q) = 0 \implies P=Q$
-    \item $d(P,Q) = d(Q,P)$
-    \item $d(P,R) \leq d(P,Q) + d(Q,R)$
-\end{enumerate}
-
-The Hellinger metric is \emph{bounded} between 0 and 1, where 0 means the distributions are identical. The maximum distance, 1, is achieved when $P$ assigns zero probability at every point in which $Q$ assigns probability. The Hellinger distance is known for different kinds of analytical distributions. For the purposes of calculating SQ the form for two Normal distributions ($P \sim \mathcal{N}(\mu_1,\sigma_1), Q\sim\mathcal{N}(\mu_2,\sigma_2)$) is useful:
-
-When calculating SQ, we do not require Normal distributions. Rather, we only require that each distribution has a known mean, and variance. In essence, even though the distributions being compared may not be Normal, we are treating them as Normal by using the mean and standard deviation as their sufficient statistics.
-
-It helps to see a plot to visualize the properties of the Hellinger distance between two distributions. Figure \ref{fig:hellinger_surf} shows how the distance measure varies with a changing $\mu_1$ and $\sigma_1$. In this example $\mu_2=0.0$ and $\sigma_2=1.0$.
+To aid in forming intuition, it helps to make a surface plot of the Hellinger distance between two distributions. Figure \ref{fig:hellinger_surf} shows how the distance measure varies with a changing $\mu_1$ and $\sigma_1$. In this example $\mu_2=0.0$ and $\sigma_2=1.0$.
 
 \begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/hellinger_surf}
-    \caption{Visualization of how the Hellinger distance varies with $\Delta\mu=\mu_1-\mu_2$ and $\sigma_1$ when $\mu_2=0.0$ and $\sigma_2=1.0$}
-    \label{fig:hellinger_surf}
-\end{figure}
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.9\linewidth]{build/sq_v2_fig}
-    \caption{Figure that graphically depicts the key values involved in calculating SQ.}
+    \caption{Visualization of how the Hellinger distance varies with $\Delta\mu=\mu_P-\mu_Q$ and $\sigma_P$ when $\mu_Q=0.0$ and $\sigma_Q=1.0$}
     \label{fig:hellinger_surf}
 \end{figure}
 
-Using the Hellinger distance we are able to quantify how much the trusted and candidate distributions overlap. However, there are a couple of other considerations that need to be taken into account. First, is that since the Hellinger distance is a distance measure it is always greater than zero, and so information that indicates if a distribution is better or worse is lost. In order to address this we use the sign of the difference between the two distributions $(\mu_1-\mu_2)$.
+Using the Hellinger distance the overlap between $T$ and $C$ can be calculated. However, there are a couple of other considerations that need to be taken into account. 
 
-The next consideration is that just because distance between two distributions may be great or small, does not mean that in the big picture the difference is actually that great. In the extreme case one might imagine two Normal distributions with means $\mu_1=1$ and $\mu_2=2$, and low variances $\sigma_1=\sigma_2=1e\-5$. In this case the Hellinger distance between the two would be 1 since they share practically no overlapping probability. However, if the means of the distributions are nearly equal on the global scale (for example if range of interest is between $[-1e3,1e3]$), then the quantity of the Hellinger distance isn't as important.
+\subsubsection{Difference in Expected Reward}
+The Hellinger distance as a distance measure is always greater than zero, and so information that indicates if a distribution is better or worse (more or less expected reward) is lost. In order to keep this information the sign of the difference between the expected rewards of the two distributions $\text{sgn}(\mu_1-\mu_2)$ can be used.
 
-Incorporating all of these ideas together yields the equation for solver quality:
+\subsubsection{Relative Difference on a Global Scale}
+The next consideration is that just because distance between two distributions may be great or small, does not mean that in the big picture the difference is actually that great. In the extreme case one might imagine two Normal distributions with means $\mu_1=1$ and $\mu_2=2$, and low variances $\sigma_1^2=\sigma_2^2=1e\-5$. In this case the Hellinger distance between the two would be 1 since they share practically no overlapping probability. However, if the means of the distributions are nearly equal on the global scale (for example if range of interest is between $[-1e3,1e3]$), then the quantity of the Hellinger distance isn't as important.
+
+\subsubsection{Putting the pieces together}
+In the current formulation, when calculating \xQ, Normal distributions are not required. Instead, each distribution must only have a known mean, and variance. In essence, even though the distributions being compared may not be Normal, they are treated as Normal by using the mean and standard deviation as their sufficient statistics.
 
 \begin{align}
+    \text{q} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(T,C)} \label{eq:q}\\
     \Delta \mu &= \mu_c-\mu_t\\
-    f &= \Delta \mu/(r_H-r_L) \label{eq:f}\\
-    \text{sq} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(T,C)} \label{eq:sq}
+    f &= \Delta \mu/(r_H-r_L) \label{eq:f}
 \end{align}
 
 The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. Basically, should the relationship between $f$ and $H_{\mathcal{N}}$ be $1\to1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{sq}$ as $f$ grows smaller, and $f$ should be more influential as it increases. The effects of different values of $\alpha$ are illustrated in Figure \ref{fig:alphas}. We have found $\alpha=1/2$ gives results that `make sense' to users; future work could investigate the `best' value for $\alpha$ via user studies.
@@ -82,7 +91,7 @@ While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Eq.
 
 We use $L=2$ so that when $s=0$ (distributions are identical) SQ will be 1. The parameter $k$ is selected to be $5$ so that SQ `saturates' at around $SQ=\pm1$ (see Figure \ref{fig:log_sat}).
 \begin{align}
-    x_{Q} &= \frac{2}{1+exp(-\text{sq}/5)}\label{eq:SQ}
+    x_{Q} &= \frac{2}{1+exp(-\text{q}/5)}\label{eq:SQ}
 \end{align}
 \begin{figure*}[tbp]
     \centering
