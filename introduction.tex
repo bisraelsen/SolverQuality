@@ -1,31 +1,49 @@
 \section{Introduction}
-Main goal: Argue for SC, and \xQ. Present \xQ{} and justify decisions. Demonstrate the performance on `realistic simulations'.
+% Main goal: Argue for SC, and \xQ. Present \xQ{} and justify decisions. Demonstrate the performance on `realistic simulations'.
 
-\nisar{can probably borrow text from Matt's RSS paper and Nick's InfoTech paper to help establish the context and motivation for this work...to argue for need for assurances and self-confidence, need to first establish that autonomous systems/robots are here and rely heavily on ML techniques as well as decision-making algorithms to operate under uncertainty...difficult to ensure transparency because same inputs/operating conditions may lead to different behaviors, which in turn affects user trust...lots of work lately on trust in autonomous systems (cite some refs), which relates very closely to question of how to establish transparency and explainability and predictability, etc. for ML systems...key difference is that autonomous systems are to a large extent expected to be self-directed and self-sufficient decision makers -- though, in reality, they must operate within a delegated scope of action and competency (cite Johnson's `Seven Deadly Myths of Autonomous Systems') ... thus the transparency/explainability question in this case is: how does a system know its own limits and convey this to a user/stakeholder? Or, equivalently: how can an autonomous system justify it's ability to accomplish a task? note: they key insight we bring to the table here is that the question of introspection and communication of a machine's own limits is itself a complex problem of meta-reasoning that requires its own set of AI/learning approaches to tackle...leads to idea of algorithmic self-confidence as an assurance...  }
+Thanks to exciting new advances in artificial intelligence and machine learning, intelligent autonomous physical systems (APS) are poised to tackle complex decision making problems for high-consequence applications, such as wilderness search and rescue \cite{}, civilian/commercial air and ground transportation \cite{}, national defense \cite{}, agriculture \cite{}, manufacturing \cite{}, and remote science and space exploration \cite{}. 
+Unlike low-level automation for factory assembly lines, vehicle cruise control, building thermostats, etc., APS are expected to be self-sufficient and make self-guided decisions about complex open-ended problems delegated by users/stakeholders. APS that are taskable -- able to translate high-level commands into suitable processes for sensing, learning, reasoning, communicating, and acting under uncertainty -- must also be cognizant and knowledge-rich -- capable of introspectively reasoning about the capabilities and limitations of their own processes, anticipating possible failures, and able to recognize when the are operating incorrectly to adapt accordingly. To ensure long-term robustness and resilience for minimally supervised operations, APS behaviors must be predictable, understandable, and explainable to human users/stakeholders, who in many cases can also provide collaborative high-level assistance or supervisory directives in difficult situations. \nisar{cite DOD studies on autonomy and rel papers...}
+
+This work is motivated by the need to develop new computational strategies for cognizance and transparent meta-reasoning to assess when an APS approaches/reaches its \emph{competency boundaries}. If computed and communicated correctly, such assessments can provide users with clearer predictions of APS behavior and understanding of actual APS capabilities. This can not only allow APS to take initiatives to stay within its competency boundary in untested/untestable situations, but also provide users/stakeholders with assurances that allow them to properly calibrate trust in (and hence make proper use of) intelligent APS \cite{Israelsen-ACM-2018}. 
+
+These properties are especially important for APS that rely heavily on non-deterministic algorithms for decision-making under uncertainty, reasoning with limited/imperfect models, and learning with limited data. 
+From self-driving cars and unmanned aircraft on Earth to planetary rovers in space \cite{}, and from networked smart devices in the home to smart building systems \cite{}, such APS are now becoming a pervasive part of everyday reality. 
+%Crucially, these systems require interaction among several different algorithmic components to support intelligent APS capabilities (for sensing, perception, planning, control, communication, etc.). 
+%Algorithms for these capabilities are often studied in isolation, but not together... 
+%\nisar{but not much work has been done in terms of holistically looking at APS operating under uncertainty -- expand on this in background...} 
+Whereas most work on algorithmic introspection and meta-reasoning to date %for intelligent and learning agents 
+has focused on outcome-based analyses for intelligent/learning agents with narrowly defined capabilities and tasks, machine self-confidence places a stronger emphasis on process-based analysis for embodied systems (i.e. an engineered sum of several interconnected algorithmic and physical parts) that must operate in more open-ended settings, where the interpretation of `favorable/unfavorable' outcomes can shift in subtle but significant (and sometimes surprising) ways as a function of APS instantiation and task context. 
+
+In this paper, we present and build on a recently developed algorithmic framework for computing and evaluating self-assessments in APS that leads to shorthand metrics of \emph{machine self-confidence}. Self-confidence is defined as an APS' perceived ability to achieve assigned goals after accounting for uncertainties in its knowledge of the world, its own state, and its own reasoning and execution abilities \cite{...}. 
+Algorithmic computation of self-confidence is in principle strongly linked to model-based assessments of probabilities pertaining to task outcomes and completion -- but crucially goes further to provide insight into how well an APS's processes for decision-making, learning, perception, etc. are matched to intended tasks. 
+We argue that the short-hand insight provided by self-confidence assessments can serve as a transparent and decomposable/traceable feedback signal to anticipate degraded, nominal, or enhanced APS performance -- %adapt autonomous behavior, 
+thereby calibrating user trust in uncertain dynamic task settings. 
+
+...So what are we doing in this paper exactly: provide a brief overview of our factorized machine self-confidence (FaMSeC) framework in the context of autonomous decision-making, and discuss key principles/ideas...then focus on idea of solver quality for decision making under uncertainty in the context of MDPs -- which are the foundation of things like reinforcement learning, etc. and are widely used as framework for robotics, etc...in doing this, we set up an example concrete grounding problem inspired by our work with unmanned vehicles...then show some preliminary computational results and discuss ongoing/future work...
+
+%\nisar{can probably borrow text from Matt's RSS paper and Nick's InfoTech paper to help establish the context and motivation for this work...to argue for need for assurances and self-confidence, need to first establish that autonomous systems/robots are here and rely heavily on ML techniques as well as decision-making algorithms to operate under uncertainty...difficult to ensure transparency because same inputs/operating conditions may lead to different behaviors, which in turn affects user trust...lots of work lately on trust in autonomous systems (cite some refs), which relates very closely to question of how to establish transparency and explainability and predictability, etc. for ML systems...key difference is that autonomous systems are to a large extent expected to be self-directed and self-sufficient decision makers -- though, in reality, they must operate within a delegated scope of action and competency (cite Johnson's `Seven Deadly Myths of Autonomous Systems') ... thus the transparency/explainability question in this case is: how does a system know its own limits and convey this to a user/stakeholder? Or, equivalently: how can an autonomous system justify it's ability to accomplish a task? note: they key insight we bring to the table here is that the question of introspection and communication of a machine's own limits is itself a complex problem of meta-reasoning that requires its own set of AI/learning approaches to tackle...leads to idea of algorithmic self-confidence as an assurance...  }
 
 within the scope of FAT* `topics of interest' we fall under the \emph{Transparency} branch. Specifically `Interpretability of ML models', and `Generation of explanations' (although probably more interpretability according to most people's definitions).
 
-withing the scope of the FAT* tracks I believe that we align with:
-
+\nisar{very important: need a statement of contributions -- why should this audience care about this work? what is the intellectual contribution? (would be good to see other papers from previous year's proceedings to see examples)...}
+within the scope of the FAT* tracks I believe that we align with:
 \begin{enumerate}
     \item Statistics, Machine Learning, and Data Mining
     \item HCI, and Information Visualiation
     \item \ldots possibly something along the lines of empirical studies, as that is what we intend to do
 \end{enumerate}
 
-We can choose `archival' or `non-archival'. I think we probably want to do archival, since this is a promising `home' for our research anyway.
+% We can choose `archival' or `non-archival'. I think we probably want to do archival, since this is a promising `home' for our research anyway.
 
-\nisar{very important: need a statement of contributions -- why should this audience care about this work? what is the intellectual contribution? (would be good to see other papers from previous year's proceedings to see examples)}
+% \subsection{Proposed outline:}
 
-\subsection{Proposed outline:}
-
-\begin{itemize}
-    \item Motivation---why MDPs, why meta-analysis, why self-confidence? \nisar{should add in some background about autonomous systems concepts that are relevant for this audience to pick up key ideas...}
-    \item Related work---quickly review some related work in the area \nisar{what other ideas specifically should be mentioned?}
-    \item Approach---desiderata, Hellinger distance, etc
-    \item Results/Discussion---Illustrative example, and theoretical example
-    \item Conclusions/Future Work---restate purpose of SC, and particularly \xQ. Discuss continuing efforts to quantify effects with human-involved experiments. Further development of \xH, \xI, and \xM.
-\end{itemize}
+% \begin{itemize}
+%     \item Motivation---why MDPs, why meta-analysis, why self-confidence? \nisar{should add in some background about autonomous systems concepts that are relevant for this audience to pick up key ideas...}
+%     \item Related work---quickly review some related work in the area \nisar{what other ideas specifically should be mentioned?}
+%     \item Approach---desiderata, Hellinger distance, etc
+%     \item Results/Discussion---Illustrative example, and theoretical example
+%     \item Conclusions/Future Work---restate purpose of SC, and particularly \xQ. Discuss continuing efforts to quantify effects with human-involved experiments. Further development of \xH, \xI, and \xM.
+% \end{itemize}
 
 \subsection{Related Work}
     Discuss related work such as
