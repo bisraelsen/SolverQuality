@@ -19,12 +19,6 @@ Figure \ref{fig:sq_v2} is a conceptual figure illustrating some of the key compo
     \label{fig:sq_test}
 \end{figure}
 
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=0.9\linewidth]{build/sq_v2_fig}
-    \caption{Figure that graphically depicts the key values involved in calculating \xQ. Here $x$ represents a `parameter of interest' of task \task.}
-    \label{fig:sq_v2}
-\end{figure}
 
 \subsection{Learning \surrogate}
 The surrogate model \surrogate{} can be any model capable of predicting \rwdstarapprox{} given \task. In the formulation presented above \rwdstariapprox{} only represents the mean and standard deviation for \rwdstari{} (this makes the learning problem less complicated, but is not necessary). Figure \ref{fig:sq_train} depicts how the surrogate model is trained. Learning \surrogate{} would typically be done `offline' when more computation power and time are available.
@@ -58,7 +52,7 @@ The next consideration is that just because distance between two distributions m
 \subsubsection{Putting the pieces together}
 Using the points discussed above the expression for the quality of candidate solver \solve{} w.r.t. the reference solver \solvestar{} is (again see Fig.~\ref{fig:sq_v2} for intuition):
 \begin{align}
-    \text{q} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(T,C)} \label{eq:q}\\
+    \text{q} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(T,C)} \label{eq:q}
 \end{align}
 
 Where $\Delta \mu &= \mu_c-\mu_t$, and $f &= \Delta \mu/(r_H-r_L)$. The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. In essence, should the relationship of the effects of $f$ and $H_{\mathcal{N}}$ be $1:1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{q}$ as $f$ grows smaller, and $f$ should be more influential as it increases. The effects of different values of $\alpha$ are illustrated in Figure \ref{fig:alphas}. We have found $\alpha=1/2$ gives results that `make sense' to users; future work could investigate the `best' value for $\alpha$ via user studies.
