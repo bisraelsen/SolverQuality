@@ -92,11 +92,11 @@ within the scope of the FAT* tracks I believe that we align with:
     \begin{enumerate}[label=\textbf{C\arabic*}]
         \item It is unclear how policies should be compared \label{itm:l1}
         \item Exact solutions to most practical problems are infeasible due to large state-spaces \label{itm:l2}
-        \item Even if \ref{itm:l2} weren't an issue, it is generally impossible to evaluate the performance of any solver on \emph{all} possible problems \label{itm:l3}
+        \item Even if \ref{itm:l2} weren't an issue, it is generally impossible to evaluate the performance of any solver on \emph{all} possible problems \label{itm:l3} of a given class
     \end{enumerate}
 
     \subsubsection{Addressing \ref{itm:l1}} \label{sec:compare_policies}
-        Solvers of all classes are similar in that they operate on a specified problem, and have defined solver parameters that govern their behavior, in order to produce a policy $\pi$ that is a mapping from states to actions. A few possibilities for comparing policies include:
+        Solvers of all classes are similar in that they operate on a specified problem, in order to produce a policy $\pi$ that is a mapping from states to actions. A few possibilities for comparing policies include:
     
         \begin{enumerate}
             \item Compare utilities at each state \label{itm:i1}
@@ -121,4 +121,4 @@ within the scope of the FAT* tracks I believe that we align with:
     \subsubsection{Addressing \ref{itm:l2}, and \ref{itm:l3}} \label{sec:practicality}
         In order to address \ref{itm:l2} a `trusted solver' \solvestar{} could be introduced as the reference to which the candidate solver \solve{} can be compared. This solver need not be exact (but could be). Ultimately, \solvestar{} is only required to be a reference of some kind; it may be optimal, or it may be abysmal. In fact given a space of all possible unseen tasks of class $\text{some task class notation}$, \solvestar{} will likely be abysmal for some of them.
 
-        Still according to \ref{itm:l3} it is impractical, or impossible, to make an exact solution for all tasks $\text{task class notation}$. Literature on `Empirical Hardness Models' (EHMs) lends some direction for confronting this challenge. In their work \cite{Leyton-Brown2009-yr,Hutter2009-og} introduced EHMs in order to predict the empirical runtime performance of an algorithm on a problem with given features \brett{add some more detail about the approach, I think they used SAT*}. Applying similar logic in this domain, it should be possible to learn a surrogate model \surrogate{} that predicts the reward distribution \rwdstarapprox{} of the trusted solver \solvestar{} for a given task \task. In this way it is possible to estimate the performance of \solvestar{} on problems to which it has never been applied.
+        Still, according to \ref{itm:l3}, it is impractical, or impossible, to find an exact solution for all tasks $\text{task class notation}$. Literature on `Empirical Hardness Models' (EHMs) lends some direction for confronting this challenge. In their work \cite{Leyton-Brown2009-yr,Hutter2009-og} introduced EHMs in order to predict the empirical runtime performance of an algorithm on a problem with given features \brett{add some more detail about the approach, I think they used SAT*}. Applying similar logic in this domain, it should be possible to learn a surrogate model \surrogate{} that predicts the reward distribution \rwdstarapprox{} of the trusted solver \solvestar{} for a given task \task. In this way it is possible to estimate the performance of \solvestar{} on problems to which it has never been applied.
