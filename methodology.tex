@@ -34,13 +34,6 @@ Perhaps the easiest way of calculating the similarity between distributions is t
 
 To aid in forming intuition, see Fig.~\ref{fig:hellinger_surf} which shows how the distance measure varies with a changing $\mu_1$ and $\sigma_1$. In this example $\mu_2=0.0$ and $\sigma_2=1.0$.
 
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Figures/hellinger_surf}
-    \caption{Visualization of how the Hellinger distance varies with $\Delta\mu=\mu_P-\mu_Q$ and $\sigma_P$ when $\mu_Q=0.0$ and $\sigma_Q=1.0$}
-    \label{fig:hellinger_surf}
-\end{figure}
-
 Using the Hellinger distance the overlap between $T$ and $C$ can be calculated. However, there are a couple of other considerations that need to be taken into account. 
 
 \subsubsection{Difference in Expected Reward: $\pmb{\Delta \mu}$}
@@ -59,34 +52,14 @@ Where $\Delta \mu &= \mu_c-\mu_t$, and $f &= \Delta \mu/(r_H-r_L)$. The exponent
 
 In the current formulation, when calculating \xQ, Normal distributions are not required. Instead, each distribution must only have a known mean, and variance. In essence, even though the distributions being compared may not be Normal, they are treated as Normal by using the mean and standard deviation as their sufficient statistics.
 
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.90\linewidth]{Figures/power_comparison}
-    \caption{Relative effects of different values of $\alpha$.}
-    \label{fig:alphas}
-\end{figure}
-
 \subsubsection{Some Adjustments For Humans}
 While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Eq. \ref{eq:f} is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep \xQ{} value within some range and avoid arbitrarily large values that can be confusing to humans. The general logistic equation is useful for this.
 We use $L=2$ so that when $s=0$ (distributions are identical) \xQ{} will be 1. The parameter $k$ is selected to be $5$ so that \xQ{} `saturates' at around $x_Q=\pm1$ (see Figure \ref{fig:log_sat}).
 \begin{align}
     x_{Q} &= \frac{2}{1+exp(-\text{q}/5)}\label{eq:SQ}
 \end{align}
-\begin{figure*}[tbp]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Figures/logistic_saturation}
-    \caption{Illustration of the behavior of the logistic function given different values of $k$. With $k=1$ the function reaches `saturation' at around $\pm5$. This `saturation' point $x_{sat}\approx 5/k$ helps to design \xQ{} to be able have the right scale when comparing distributions.}
-    \label{fig:log_sat}
-\end{figure*}
 
 Figure \ref{fig:sq_surf} shows the behavior of \xQ{} when $\sigma_1=1.0,\mu_2=0.0,\sigma_2=1.0$, and $\mu_1$ and $f$ vary.
-
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Figures/sq_surf}
-    \caption{Variation in \xQ{} based on change in $\mu_1$ and $f$ compared for different values of $\alpha$.}
-    \label{fig:sq_surf}
-\end{figure}
 
 \subsection{Examples}
 It is easiest to show results of this calculation on some simple examples. Figure \ref{fig:sq_thry1} is a toy example showing the expected reward (with uncertainty) for a trusted solver given a specific task parameter, as well as that of a `candidate' solver. Different points of interest (indicating specific values of the task parameter) are highlighted by a star. Only two cases are considered here for brevity.
