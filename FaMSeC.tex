@@ -9,7 +9,7 @@
     \begin{figure}[tb]
         \centering
         \includegraphics[width=0.9\linewidth]{Figures/sq_v2_fig-crop}
-        \caption{Figure that graphically depicts the key values involved in calculating \xQ. Here $x$ represents a `parameter of interest' of task \task.}
+        \caption{Key values involved in calculating \xQ, where $x$ represents a `parameter of interest' for task \task. \nisar{couldn't x also be a solver parameter?}}
         \label{fig:sq_v2}
     \end{figure}
 
@@ -25,7 +25,7 @@
             \item [\xQ{}:] \textbf{Solver Quality}---How well can the solver use the model to generate policies/plans?
         \end{itemize}
 
-    Self-confidence \xSC{} is a composite assurance that stems from some combination of these five factors. \xP{} has been previously defined in \cite{Aitken2016-cv}, but has not yet been evaluated as an effective assurance as per the guidelines laid out in the work on assurances. Herein \xQ{} is investigated. \nisar{edit...note that we are notionally using -1 to 1 range as a notional example here...do we later shift this range to 0 to 2 for \xQ?? (maybe note this here...or just change in table example below -- and/or maybe use this to underscore fact that ranges can be set arbitrarily and depending on context, e.g. see Hutchins paper...don't want to get too hung up on this...) }
+    Self-confidence \xSC{} is a composite assurance \nisar{do we need more jargon?} that stems from some combination of these five factors. \xP{} has been previously defined in \cite{Aitken2016-cv}, but has not yet been evaluated as an effective assurance as per the guidelines laid out in the work on assurances. Herein \xQ{} is investigated. \nisar{edit...note that we are notionally using -1 to 1 range as a notional example here...do we later shift this range to 0 to 2 for \xQ?? (maybe note this here...or just change in table example below -- and/or maybe use this to underscore fact that ranges can be set arbitrarily and depending on context, e.g. see Hutchins paper...don't want to get too hung up on this...) }
 
 \subsection{VIP Escort Example Revisited}
 \nisar{TODO: talk about possible stochastic motion planning solvers (could be MDP family or others...) and discuss/move in table with example boundary conditions -- BE MINDFUL OF RANGE VALUES AS PER NOTE ABOVE...transition to talking about computation: start with pointing to Matt's thesis work for outcome assessment with brief mention of UPM/LPM...then transition to next section on how to compute solver quality}
@@ -46,7 +46,7 @@
         \item extend to unseen tasks \label{itm:d3}
     \end{enumerate}
     
-    Evaluating the `quality' of something implies some kind of comparison is taking place. In this setting the desired comparison is between a `candidate solver' \solve{} and some reference solver. Ideally, the candidate solver could be compared to the exact solution, but there are three main challenges:
+    \nisar{TODO: edit...elaborate a bit more on each item below. Also note connection to comparison of utilities, and make distinction b/w competence and outcome assessment -- don't skim over the subtle intellectual problems! Need to unpack the context for the lay reader who has never seen this before...} Evaluating the `quality' of something implies some kind of comparison is taking place. In this setting the desired comparison is between a `candidate solver' \solve{} and some reference solver. Ideally, the candidate solver could be compared to the exact solution, but there are three main challenges:
 
     \begin{enumerate}[label=\textbf{C\arabic*}]
         \item It is unclear how policies should be compared \label{itm:l1}
