@@ -19,7 +19,7 @@
 For instance, if a natural language interface is used for mission planning, this factor could assess how well user inputs are mapped to reward functions using fixed vocabularies for different mission profiles. 
 %This factor can, for instance, capture uncertainty in task objectives or reward functions \cite{abbeel2004apprenticeship, hadfield2016cooperative}. 
 %
-\item \xM -- \textit{\textbf{model and data validity}}: Are the agent's learned/assumed models and associated training data used for decision-making good enough proxies for the real world? This factor assesses how well the set of measurements and events predicted by the autonomous system line up with what it actually should observe in reality. 
+\item \xM -- \textit{\textbf{model and data validity}}: Are the agent's learned and/or assumed models and associated training data used for decision-making good enough proxies for the real world? This factor assesses how well the set of measurements and events predicted by the autonomous system line up with what it actually should observe in reality. 
 
 %Specifically, this factor uses features and parameters of the `Model' block to assess how well the set of measurements and events predicted by the autonomous system line up with what it actually should observe in reality. 
 %For the U2R2 problem, model validity is related to the size of the state space of the model and the level of discretization used in the environment and action set.
@@ -109,6 +109,6 @@ Furthermore, the factors considered here are neither exclusive nor exhaustive. F
    \begin{figure}[tb]
         \centering
         \includegraphics[width=0.8\linewidth]{Figures/sq_v2_fig-crop}
-        \caption{Key values involved in calculating \xQ, where $x$ represents a `parameter of interest' for task \task. \nisar{couldn't x also be a solver parameter?}}
+        \caption{Key values involved in calculating \xQ, where $x$ represents a `parameter of interest' for task \task, or solver \solve.}
         \label{fig:sq_v2}
     \end{figure}
