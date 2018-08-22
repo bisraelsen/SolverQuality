@@ -79,7 +79,7 @@ An important insight is that while the $d_{mcts}=9$ solver is very capable of so
     \label{fig:mcts_d_med}
 \end{figure}
 
-\subsection{Varying the transition probability}
+\subsection{Varying $p_{trans}$}
 Experiment 3 was used for this evaluation, \solverstar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1.
 
 Figure~\ref{fig:tprob_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
@@ -99,7 +99,7 @@ Figure~\ref{fig:tprob_bad} shows the results for the candidate solver with $d_{m
     \label{fig:tprob_bad}
 \end{figure}
 
-\subsection{Varying the transition probability and exploration constant}
+\subsection{Varying $p_{trans}$ and $e_{mcts}$}
 Experiment 4 was used for this evaluation, \solverstar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. Both $p_{trans}$ and $e_{mcts}$ were variable for the experiments. The results are found in Figs.~\ref{fig:tprob_emcts_ok} and \ref{fig:tprob_emcts_bad}.
 
 Figure~\ref{fig:tprob_emcts_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
