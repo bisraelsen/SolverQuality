@@ -54,15 +54,19 @@ In the current formulation, when calculating \xQ, Normal distributions are not r
 
 \subsubsection{Some Adjustments For Humans}
 While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Eq. \ref{eq:f} is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep \xQ{} value within some range and avoid arbitrarily large values that can be confusing to humans. The general logistic equation is useful for this.
-We use $L=2$ so that when $s=0$ (distributions are identical) \xQ{} will be 1. The parameter $k$ is selected to be $5$ so that \xQ{} `saturates' at around $x_Q=\pm1$ (see Figure \ref{fig:log_sat}).
+We use $L=2$ so that when $s=0$ (distributions are identical) \xQ{} will be 1. The parameter $k$ is selected to be $5$ so that \xQ{} `saturates' at around $\text{q}=\pm1$.
 \begin{align}
     x_{Q} &= \frac{2}{1+exp(-\text{q}/5)}\label{eq:SQ}
 \end{align}
 
-Figure \ref{fig:sq_surf} shows the behavior of \xQ{} when $\sigma_1=1.0,\mu_2=0.0,\sigma_2=1.0$, and $\mu_1$ and $f$ vary.
-
 \subsection{Examples}
-It is easiest to show results of this calculation on some simple examples. Figure \ref{fig:sq_thry1} is a toy example showing the expected reward (with uncertainty) for a trusted solver given a specific task parameter, as well as that of a `candidate' solver. Different points of interest (indicating specific values of the task parameter) are highlighted by a star. Only two cases are considered here for brevity.
+A toy example is useful in evaluating whether \xQ{} yields desirable results. Figure~\ref{fig:sq_thry1} illustrates a toy example showing the expected reward (with uncertainty) for a trusted solver \solvestar{} given a specific, generic, task parameter, as well as that of a `candidate' solver \solve. Different points of interest (indicating specific values of the task parameter) are highlighted by a star. Figure~\ref{fig:sq_thry2} shows the resulting reward distributions from the trusted and candidate solvers at locations B and C from Fig.~\ref{fig:sq_thry1}.
+
+At B the candidate solver has a lower expected reward than the trusted solver and a higher variance than the trusted solver. Intuitively \xQ{} should be less than one. As shown when $r=5$ (i.e. $r_H-r_L=5$, the global reward range is `large') $x_Q=0.667$ which indicates that the candidate solver is marginally less capable than the trusted solver, and when $r=0.05$ then $x_Q=0.002$ indicates that \solve{} is much less capable than \solvestar.
+
+At C the candidate solver \solve{} has higher expected reward than \solverstar, but a larger variance. Intuitively we would expect \xQ{} of \solve{} to be a little greater than one, and in fact when $r=5$, $x_Q=1.095$. As the global reward range $r$ decreases the difference in capability between \solve{} and \solvestar{} increases with $x_Q=1.995$ at $r=0.005$.
+
+Admittedly, having $r$ much less than the variance of \solve{} and \solvestar{} doesn't make a lot of sense in reality, but it illustrates that \xQ{} behaves as expected mathematically. In Sec.~\ref{sec:results} a more realistic scenario is considered.
 
 \begin{figure}[tbp]
     \centering
@@ -72,10 +76,18 @@ It is easiest to show results of this calculation on some simple examples. Figur
 \end{figure}
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.9\linewidth]{Figures/p2}
-    \includegraphics[width=0.9\linewidth]{Figures/p3}
+    \includegraphics[width=0.9\linewidth]{Figures/p3}\\
+    \vspace{0.3cm}
     \includegraphics[width=0.9\linewidth]{Figures/p4}
-    \includegraphics[width=0.9\linewidth]{Figures/p5}
-    \caption{Example of expected rewards of solvers versus variation of a problem parameter. Values of \xQ{} are calculated for some different global ranges $r$ of rewards.}
+    \caption{Example of expected rewards of solvers versus variation of a problem parameter at locations B (top) and C (bottom). Values of \xQ{} are calculated for some different global ranges $r=r_H-r_L$ of rewards as indicated in each figure.}
     \label{fig:sq_thry2}
 \end{figure}
+% \begin{figure}[tbp]
+    % \centering
+    % \includegraphics[width=0.9\linewidth]{Figures/p2}
+    % \includegraphics[width=0.9\linewidth]{Figures/p3}
+    % \includegraphics[width=0.9\linewidth]{Figures/p4}
+    % \includegraphics[width=0.9\linewidth]{Figures/p5}
+    % \caption{Example of expected rewards of solvers versus variation of a problem parameter. Values of \xQ{} are calculated for some different global ranges $r$ of rewards.}
+    % \label{fig:sq_thry2}
+% \end{figure}
