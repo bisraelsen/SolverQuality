@@ -52,7 +52,7 @@ Where $\Delta \mu &= \mu_c-\mu_t$, and $f &= \Delta \mu/(r_H-r_L)$. The exponent
 
 In the current formulation, when calculating \xQ, Normal distributions are not required. Instead, each distribution must only have a known mean, and variance. In essence, even though the distributions being compared may not be Normal, they are treated as Normal by using the mean and standard deviation as their sufficient statistics.
 
-\subsubsection{Some Adjustments For Humans}
+\subsubsection{Accomodations For Humans}
 While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Eq. \ref{eq:f} is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep \xQ{} value within some range and avoid arbitrarily large values that can be confusing to humans. The general logistic equation is useful for this.
 We use $L=2$ so that when $s=0$ (distributions are identical) \xQ{} will be 1. The parameter $k$ is selected to be $5$ so that \xQ{} `saturates' at around $\text{q}=\pm1$.
 \begin{align}

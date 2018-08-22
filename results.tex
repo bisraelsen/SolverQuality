@@ -48,9 +48,9 @@ rwd_{sense}  & The reward for making a movement
     \end{tabular}
 \end{table*}
 
-Three evaluations were completed. First, \xQ{} was calculated for MCTS solvers of different depth on the network from Fig.~\ref{fig:roadnet} (all other parameters were held constant). Second, \xQ{} was evaluated for a candidate solver for different values of $p_{trans}$. Finally, \xQ{} was evaluated for a candidate solver at different $p_{trans}$ and $e_{mcts}$.
+Three evaluations were completed. First, \xQ{} was calculated for MCTS solvers with different parameters. (all other parameters were held constant). Second, \xQ{} was evaluated for a candidate solver with varying task parameters. Finally, \xQ{} was evaluated for a candidate solver with different task \emph{and} solver parameters.
 
-\subsection{Varying $d_{mcts}$}
+\subsection{Varying Solver Parameters}
 This evaluation involved experiments 1 and 2 from Table~\ref{tab:exps}. The MCTS solver was run on each of the two networks ($N=13$ for 1, and $N=45$ for 2) with different depths. In each case one of the solvers was chosen as the trusted one (i.e. chose a `good' solver, but not necessarily the `best' one). In the case of experiment 1 that was the $d_{mcts}=9$ solver, and in experiment 2 it was the $d_{mcts}=25$ solver.
 
 The results for experiment 1 are shown in Fig.~\ref{fig:mcts_d}. As expected \xQ{} between the trusted solver and itself is 1.0. We see that candidate solvers depth 6 through 10 are about equivalent to the trusted solver (and each other), which indicates they are similarly capable of solving the problem. Whereas candidate solvers with depth 1 through 3 are much less capable than the trusted solver.
@@ -79,7 +79,7 @@ An important insight is that while the $d_{mcts}=9$ solver is very capable of so
     \label{fig:mcts_d_med}
 \end{figure}
 
-\subsection{Varying $p_{trans}$}
+\subsection{Varying Task Parameters}
 Experiment 3 was used for this evaluation, \solverstar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1.
 
 Figure~\ref{fig:tprob_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
@@ -99,7 +99,7 @@ Figure~\ref{fig:tprob_bad} shows the results for the candidate solver with $d_{m
     \label{fig:tprob_bad}
 \end{figure}
 
-\subsection{Varying $p_{trans}$ and $e_{mcts}$}
+\subsection{Simultaenously Varying Task and Solver Parameters}
 Experiment 4 was used for this evaluation, \solverstar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. Both $p_{trans}$ and $e_{mcts}$ were variable for the experiments. The results are found in Figs.~\ref{fig:tprob_emcts_ok} and \ref{fig:tprob_emcts_bad}.
 
 Figure~\ref{fig:tprob_emcts_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
