@@ -15,11 +15,11 @@ In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver w
     \hfill
     \begin{subfigure}[b]{0.50\linewidth}
         \centering
-        \includegraphics[width=0.9\linewidth]{Figures/medium_roadnet.png}
+        \includegraphics[width=0.7\linewidth]{Figures/medium_roadnet.png}
         \caption{Road network N=45}
         \label{fig:med_roadnet}
     \end{subfigure} 
-    \caption{Two example road networks. UGV begins at yellow node, Pursuer beings at red node, and the exit is located at the green node.}
+    \caption{Example road networks. UGV starts at yellow, Pursuer beings at red, and the exit is green.}
 \end{figure}
 
 The road network is represented as shown in Fig.~\ref{fig:roadnet}. The UGV begins at the yellow node (node 1), the pursuer begins at the red node (node 4), and the desired exit is indicated by the green node (node 13). The problem is defined by the following parameters:
@@ -27,7 +27,7 @@ The road network is represented as shown in Fig.~\ref{fig:roadnet}. The UGV begi
 \tymin=80pt
 \begin{table}[tbp]
 \footnotesize
-\caption{Table of parameters for the simplified VIP escort problem}
+\caption{Table of parameters: simplified VIP escort problem}
 \begin{tabulary}{\linewidth}{LL}
 \hline
 Parameter    & Description\\
@@ -77,17 +77,17 @@ An important insight is that while the $d_{mcts}=9$ solver is very capable of so
         \centering
         \includegraphics[width=1.0\linewidth]{Figures/sq_roadnet_mcts_i100e1000.pdf}
         \vfill
-        \caption{Experiment 1 results.}
+        \caption{Experiment 1}
         \label{fig:mcts_d}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[b]{0.98\linewidth}
         \centering
         \includegraphics[width=1.0\linewidth]{Figures/sq_mednet_mcts_i1000e2000.pdf}
-        \caption{Experiment 2 results}
-        \label{fig:mcts_d_med_roadnet}
+        \caption{Experiment 2}
+        \label{fig:mcts_d_med}
     \end{subfigure} 
-    \caption{Experiment results. \xQ{} is calculated w.r.t the trusted solver highlighted in blue.}
+    \caption{Experiment results. \xQ{} is calculated w.r.t \solvestar{} highlighted in blue.}
 \end{figure}
 
 \subsection{Varying A Task Parameter}
@@ -103,17 +103,17 @@ Figure~\ref{fig:tprob_bad} shows the results for the candidate solver with $d_{m
         \centering
         \includegraphics[width=1.0\linewidth]{Figures/transition_vary_tprob_ok.pdf}
         \vfill
-        \caption{Candidate solver depth 3}
-        \label{fig:roadnet}
+        \caption{\solve{} depth 3}
+        \label{fig:tprob_ok}
     \end{subfigure}%
     \hfill
     \begin{subfigure}[b]{0.48\linewidth}
         \centering
         \includegraphics[width=1.0\linewidth]{Figures/transition_vary_tprob_bad.pdf}
-        \caption{Candidate solver depth 1}
-        \label{fig:med_roadnet}
+        \caption{\solve{} depth 1}
+        \label{fig:tprob_bad}
     \end{subfigure} 
-    \caption{Comparison of candidate solver to a trusted solver of depth 8.}
+    \caption{Comparison of \solve{} to \solvestar{} of depth 8.}
 \end{figure}
 
 \subsection{Varying Task and Solver Parameters}
@@ -123,33 +123,33 @@ Figure~\ref{fig:tprob_emcts_ok} shows the results for the candidate solver with 
 
 Figure~\ref{fig:tprob_emcts_bad} shows the results for the candidate solver with $d_{mcts}=1$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is moderately less capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly much less capable.
 
-\begin{figure}[tbp]
+%\begin{figure}[tbp]
+%    \centering
+%    \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
+%    \caption{Comparison of candidate solver of depth 3 to that of a trusted solver with depth 8. The top-left figure shows the mean reward of the trusted solver, the bottom-left is the standard deviation of the trusted solver. The top-right figure shows the value of \xQ{} (SQ) at point A. The two blue lines indicate $r_H$ and $r_L$. The bottom-right figure shows \xQ{} at point B.}
+%    \label{fig:tprob_emcts_ok}
+%\end{figure}
+%\begin{figure}[tbp]
+%    \centering
+%    \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
+%    \caption{Same as Fig.~\ref{fig:tprob_emcts_ok} for candidate solver of depth 1.}
+%    \label{fig:tprob_emcts_bad}
+%\end{figure}
+ \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
-    \caption{Comparison of candidate solver of depth 3 to that of a trusted solver with depth 8. The top-left figure shows the mean reward of the trusted solver, the bottom-left is the standard deviation of the trusted solver. The top-right figure shows the value of \xQ{} (SQ) at point A. The two blue lines indicate $r_H$ and $r_L$. The bottom-right figure shows \xQ{} at point B.}
-    \label{fig:tprob_emcts_ok}
+    \begin{subfigure}[b]{0.98\linewidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
+        \vfill
+        \caption{Candidate solver depth 3}
+        \label{fig:tprob_emcts_ok}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[b]{0.98\linewidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
+        \caption{Candidate solver depth 1}
+        \label{fig:tprob_emcts_bad}
+    \end{subfigure}
+    \caption{Comparison of \solve{} to \solvestar{} of depth 8. The top-left shows the mean reward of \solvestar{}, the bottom-left is the std. of \solvestar{}. Figures on RHS show \xQ{} (SQ) at points A, and B.}
 \end{figure}
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
-    \caption{Same as Fig.~\ref{fig:tprob_emcts_ok} for candidate solver of depth 1.}
-    \label{fig:tprob_emcts_bad}
-\end{figure}
-% \begin{figure}[tbp]
-    % \centering
-    % \begin{subfigure}[b]{0.48\linewidth}
-        % \centering
-        % \includegraphics[width=1.0\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
-        % \vfill
-        % \caption{Depth 3}
-        % \label{fig:roadnet}
-    % \end{subfigure}%
-    % \hfill
-    % \begin{subfigure}[b]{0.48\linewidth}
-        % \centering
-        % \includegraphics[width=1.0\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
-        % \caption{Depth 1}
-        % \label{fig:med_roadnet}
-    % \end{subfigure}
-    % \caption{Comparison of candidate solver to trusted solver of depth 8. The top-left figure shows the mean reward of the trusted solver, the bottom-left is the standard deviation of the trusted solver. The top-right figure shows the value of \xQ{} (SQ) at point A. The two blue lines indicate $r_H$ and $r_L$. The bottom-right figure shows \xQ{} at point B.}
-% \end{figure}

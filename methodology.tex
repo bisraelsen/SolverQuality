@@ -32,7 +32,7 @@ Using the Hellinger distance the overlap between $T$ and $C$ can be calculated. 
 The Hellinger distance as a distance measure is always greater than zero, and so information that indicates if a distribution is generally better or worse (i.e. more or less expected reward) is lost. In order to keep this information the sign of the difference between the expected rewards of the two distributions $\text{sgn}(\mu_1-\mu_2)$ can be used.
 
 \subsubsection{Relative Difference on a Global Scale: $\pmb{(r_H-r_L)}$}
-The next consideration is that just because distance between two distributions may be great or small, does not mean the same applies from a higher-level, or global, perspective. In an extreme case one might imagine two Normal distributions with means $\mu_1=1$ and $\mu_2=2$, and low variances $\sigma_1^2=\sigma_2^2=1e\-5$. In this case the Hellinger distance between the two would be $1$ since they share practically no overlapping probability. However, if the means of the distributions are nearly equal on the global scale (for example if the range of rewards from many different tasks is on the range $[-1e3,1e3]$), then the quantity of the Hellinger distance isn't critical from that perspective.
+The next consideration is that just because distance between two distributions may be great or small, does not mean the same applies from a higher-level, or global, perspective. In an extreme case one might imagine two Normal distributions with means $\mu_1=1$ and $\mu_2=2$, and low variances $\sigma_1^2=\sigma_2^2=1e\-5$. In this case the Hellinger distance between the two would be $1$ since they share practically no overlapping probability. However, if the means of the distributions are nearly equal on the global scale (e.g. rewards from many other tasks are on the range $[-1e3,1e3]$), then the quantity of the Hellinger distance isn't critical from that perspective.
 
 \subsubsection{Putting the pieces together}
 Using the points discussed above the expression for the quality of candidate solver \solve{} w.r.t. the reference solver \solvestar{} is (again see Fig.~\ref{fig:sq_v2} for intuition):
@@ -40,9 +40,9 @@ Using the points discussed above the expression for the quality of candidate sol
     \text{q} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(T,C)} \label{eq:q}
 \end{align}
 
-Where $\Delta \mu = \mu_c-\mu_t$, and $f = \Delta \mu/(r_H-r_L)$. The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. In essence, should the relationship of the effects of $f$ and $H_{\mathcal{N}}$ be $1:1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{q}$ as $f$ grows smaller, and $f$ should be more influential as it increases. The effects of different values of $\alpha$ are illustrated in Figure \ref{fig:alphas}. We have found $\alpha=1/2$ gives results that `make sense' to users; future work could investigate the `best' value for $\alpha$ via user studies.
+Where $\Delta \mu = \mu_c-\mu_t$, and $f = \Delta \mu/(r_H-r_L)$. The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. In essence, should the relationship of the effects of $f$ and $H_{\mathcal{N}}$ be $1:1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{q}$ as $f$ grows smaller, and $f$ should be more influential as it increases. We have found $\alpha=1/2$ gives results that `make sense'; future work could investigate the `best' value for $\alpha$ via user studies.
 
-In the current formulation, when calculating \xQ, Normal distributions are not required. Instead, each distribution must only have a known mean, and variance. In essence, even though the distributions being compared may not be Normal, they are treated as Normal by using the mean and standard deviation as their sufficient statistics.
+As formulated the only requirement of reward distributions T and C is that they have a known mean and standard deviation. In essence \xQ{} is a measure of the distance of two arbitrary distributions using only their first two moments.
 
 \subsubsection{Accommodations For Humans}
 While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Eq. \ref{eq:f} is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep \xQ{} value within some range and avoid arbitrarily large values that can be confusing to humans. The general logistic equation is useful for this.
@@ -56,15 +56,13 @@ A toy example is useful in evaluating whether \xQ{} yields desirable results. Fi
 
 At B the candidate solver has a lower expected reward than the trusted solver and a higher variance than the trusted solver. Intuitively \xQ{} should be less than one. As shown when $r=5$ (i.e. $r_H-r_L=5$, the global reward range is `large') $x_Q=0.667$ which indicates that the candidate solver is marginally less capable than the trusted solver, and when $r=0.05$ then $x_Q=0.002$ indicates that \solve{} is much less capable than \solvestar.
 
-At C the candidate solver \solve{} has higher expected reward than \solvestar, but a larger variance. Intuitively we would expect \xQ{} of \solve{} to be a little greater than one, and in fact when $r=5$, $x_Q=1.095$. As the global reward range $r$ decreases the difference in capability between \solve{} and \solvestar{} increases with $x_Q=1.995$ at $r=0.005$.
-
-Admittedly, having $r$ much less than the variance of \solve{} and \solvestar{} doesn't make a lot of sense in reality, but it illustrates that \xQ{} behaves as expected mathematically. In Sec.~\ref{sec:results} a more realistic scenario is considered.
+At C the candidate solver \solve{} has higher expected reward than \solvestar, but a larger variance. Intuitively we would expect \xQ{} of \solve{} to be a little greater than one, and in fact when $r=5$, $x_Q=1.095$. As the global reward range $r$ decreases the difference in capability between \solve{} and \solvestar{} increases with $x_Q=1.995$ at $r=0.005$. These calculations indicate that \xQ{} performs as expected. In Sec.~\ref{sec:results} a more realistic scenario is considered. 
 
 \begin{figure}[tbp]
     \centering
     \begin{subfigure}[c]{0.65\linewidth}
         \centering
-        \includegraphics[width=0.9\linewidth]{Figures/p1.pdf}
+        \includegraphics[width=1.0\linewidth]{Figures/p1.pdf}
         \vfill
         % \caption{tst}
         \label{fig:roadnet}
@@ -76,5 +74,5 @@ Admittedly, having $r$ much less than the variance of \solve{} and \solvestar{} 
         % \caption{Candidate solver depth 1}
         \label{fig:med_roadnet}
     \end{subfigure} 
-    \caption{\xQ{} calculation on example reward distributions: \solvestar{} (blue) and \solve{} (red) over a range of values of some task/solver parameter. Points of interest are indicated with a star.}
+    \caption{Assessing \xQ{} calculation on reward fxn's: \solvestar{} (blue) and \solve{} (red). Points of interest indicated by a star.}
 \end{figure}
