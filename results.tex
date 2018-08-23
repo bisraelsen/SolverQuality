@@ -1,7 +1,7 @@
 \section{Results} \label{sec:results}
 In order to investigate how \xQ{} performs on a more realistic scenario the VIP escort problem introduced in Sec.~\ref{sec:vip_escort}. While the original escort problem is defined as a POMDP with, here we investigate a somewhat simpler version of the problem, and instead use fully observable MDPs. This is reasonable because \xQ{} operates on reward distributions, which are produced by policies on any decision making problem. The benefit of using MDPs is that they are computationally less burdensome than POMDPs, while still enabling complex decision making.
 
-In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver will be used. As the name suggests MCTS involves building a tree from the starting state of the UGV and simulating a specified number of actions into the future and calculates the utility of each state. This process is repeated many times, and the utilities of each state are updated after each iteration of search. The actions selected by MCTS are based not only on the current utility of the state, but an exploration parameter that helps ensure that the search doesn't simply exploit the greatest known utilities. An MCTS solver is convenient to use during these experiments because the quality of the solver can be changed by modifying the parameters.
+In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver will be used. As the name suggests MCTS involves building a tree from the starting state of the UGV and simulating a specified number of actions into the future in order to calculate the utility of each state. This process is repeated many times, and the utilities of each state are updated after each iteration. The actions selected by MCTS are based not only on the current utility of the state, but an exploration parameter that helps ensure that the search doesn't simply exploit the greatest known utilities. An MCTS solver is convenient to use during these experiments because the quality of the solver can be changed by modifying the parameters.
 
 \begin{figure}[tbp]
     \centering
@@ -63,7 +63,7 @@ $rwd_{sense}$  & The reward for making a movement\\
 Three evaluations were completed. First, \xQ{} was calculated for MCTS solvers with different parameters. (all other parameters were held constant). Second, \xQ{} was evaluated for a candidate solver with varying task parameters. Finally, \xQ{} was evaluated for a candidate solver with different task \emph{and} solver parameters.
 
 \subsection{Varying A Solver Parameter}
-This evaluation involved experiments 1 and 2 from Table~\ref{tab:exps}. The MCTS solver was run on each of the two networks ($N=13$ for 1, and $N=45$ for 2) with different depths. In each case one of the solvers was chosen as the trusted one (i.e. chose a `good' solver, but not necessarily the `best' one). In the case of experiment 1 \solvestar{} was the $d_{mcts}=9$ solver, and in experiment 2 \solvestar{} was the $d_{mcts}=25$ solver. A surrogate \surrogate{} was not used for this evaluation, instead \rwdstar{} was calculated directly and used for comparison.
+This evaluation involved experiments 1 and 2 from Table~\ref{tab:exps}. MCTS Solvers of varying depths were used to find solutions to each of the twonetworks. In each case one of the solvers was chosen as the trusted one (i.e. chose a `good' solver). In the case of experiment 1 \solvestar{} was the $d_{mcts}=9$ solver, and in experiment 2 \solvestar{} was the $d_{mcts}=25$ solver. A surrogate \surrogate{} was not used for this evaluation, instead \rwdstar{} was calculated directly and used for comparison.
 
 The results for experiment 1 are shown in Fig.~\ref{fig:mcts_d}. As expected \xQ{} between the trusted solver and itself is 1.0. We see that candidate solvers depth 6 through 10 are about equivalent to the trusted solver (and each other), which indicates they are similarly capable of solving the problem. Whereas candidate solvers with depth 1 through 3 are much less capable than the trusted solver.
 
@@ -123,18 +123,6 @@ Figure~\ref{fig:tprob_emcts_ok} shows the results for the candidate solver with 
 
 Figure~\ref{fig:tprob_emcts_bad} shows the results for the candidate solver with $d_{mcts}=1$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is moderately less capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly much less capable.
 
-%\begin{figure}[tbp]
-%    \centering
-%    \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
-%    \caption{Comparison of candidate solver of depth 3 to that of a trusted solver with depth 8. The top-left figure shows the mean reward of the trusted solver, the bottom-left is the standard deviation of the trusted solver. The top-right figure shows the value of \xQ{} (SQ) at point A. The two blue lines indicate $r_H$ and $r_L$. The bottom-right figure shows \xQ{} at point B.}
-%    \label{fig:tprob_emcts_ok}
-%\end{figure}
-%\begin{figure}[tbp]
-%    \centering
-%    \includegraphics[width=0.9\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
-%    \caption{Same as Fig.~\ref{fig:tprob_emcts_ok} for candidate solver of depth 1.}
-%    \label{fig:tprob_emcts_bad}
-%\end{figure}
  \begin{figure}[tbp]
     \centering
     \begin{subfigure}[b]{0.98\linewidth}

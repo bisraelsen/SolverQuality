@@ -86,25 +86,22 @@ By indicating how likely favorable outcomes are expected relative to unfavorable
 \subsection{Solver Quality (\xQ)} \label{sec:SQ}
     The main aim of \xQ{} is to indicate how a solver \solve{} will perform on a given (possibly un-encountered) task \task{} of a given class \taskclass{} (i.e. all road networks with a UGV, Pursuer, and exit,et cetera as described previously). The need for \xQ{} is not necessarily easy to understand; an analogy helps to clarify:
     
-    \emph{Clarifying Example:} Think of \xQ{} as an indication of the \emph{ability} of an athlete. This is opposed to players assessment of the desirability of the outcome of a game (\xO). While an athlete may be very capable (high \xQ), the score of the game may be such that the athlete knows that it is nearly impossible to catch up and win the game (low \xO). Conversely, an athlete may not be very capable (low \xQ), and due to being na\"{i}ve has an incorrect assessment of the desirability of the outcome (\xO{} cannot be trusted).
-    
-    Formally, the desiderata for \xQ{} are:
+    \emph{Clarifying Example:} Think of \xQ{} as an indication of the \emph{ability} of an athlete. This is opposed to players assessment of the desirability of the outcome of a game (\xO). While an athlete may be very capable (high \xQ), the score of the game may be such that the athlete knows that it is nearly impossible to catch up and win the game (low \xO). Conversely, an athlete may not be very capable (low \xQ), and due to being na\"{i}ve has an incorrect assessment of the desirability of the outcome (\xO{} cannot be trusted). Formally, the desiderata are:
     
     \begin{enumerate}[label=\textbf{D\arabic*}]
-        \item reflect competence of solver \solve{} for task \task{} \label{itm:d1}
+        \item reflect competence of solver \solve{} for task \task{} (where competence is analogous to the `ability' of the athlete in the example)\label{itm:d1}
         \item enable comparison across solver classes \label{itm:d2}
-        \item extend to unseen tasks \label{itm:d3}
+        \item extend to unseen tasks of the same class \taskclass \label{itm:d3}
     \end{enumerate}
     
-   % \nisar{TODO: edit...elaborate a bit more on each item below. Also note connection to comparison of utilities, and make distinction b/w competence and outcome assessment -- don't skim over the subtle intellectual problems! Need to unpack the context for the lay reader who has never seen this before...}
-    Again, the factors \xO{} and \xQ{} differ in that while \xO{} is focused on the desirability of the outcome, \xQ{} is focused on how well \task{} can be solved using \solve; this is what is meant by `competence' in \ref{itm:d1}. For practical application, it is critical to be able to compare the quality of solvers of different classes (i.e. exact vs. approximate) because there are many different ways of solving tasks. Likewise, it is also common for an APS to encounter a similar, but previously unseen, task (i.e. a different road network).
+    For practical application, it is critical to be able to compare the quality of solvers of different classes (i.e. exact vs. approximate) because there are many different ways of solving tasks. Likewise, it is also common for an APS to encounter a similar, but previously unseen, task (i.e. a different road network).
     
     Evaluating the `quality' of something implies some kind of comparison is taking place. In this setting the desired comparison is between a `candidate solver' \solve{} and some reference solver. Ideally, the candidate solver could be compared to the exact solution (whose quality is by definition perfect), but there are three main challenges:
 
     \begin{enumerate}[label=\textbf{C\arabic*}]
         \item It is unclear how policies/solvers should be compared \label{itm:l1}
-        \item Exact solutions to most practical problems are infeasible due to large state-spaces \label{itm:l2}
-        \item Even if \ref{itm:l2} weren't an issue, it is generally infeasible, possibly impossible, to evaluate the performance of any solver (or set of solvers) on \emph{all} possible tasks \label{itm:l3} of a given class
+        \item Large state spaces make exact solutions infeasible \label{itm:l2}
+        \item It is generally impossible to evaluate the exact solution for \emph{all} tasks of a given task \label{itm:l3} of a given class
     \end{enumerate}
 
     \subsubsection{Addressing \ref{itm:l1}} \label{sec:compare_policies}
@@ -114,12 +111,12 @@ By indicating how likely favorable outcomes are expected relative to unfavorable
             \item Compare utilities at each state \label{itm:i1}
             \begin{itemize}
                 \item Merits: Evaluates whether states are assigned equal utility across solvers. Theoretically state utilities should be independent of the solver. Addresses \ref{itm:d1}
-                \item Demerits: Does not apply to solvers that represent different amounts of the state-action space (i.e. exact versus approximate solvers), or to solvers that may represent the state-action space differently (i.e. meta-solvers). This approach does not satisfy \ref{itm:d2}.
+                \item Demerits: Doesn't address \ref{itm:d2}---Doesn't apply when different solvers represent different amounts of the state space, or represent the state space differently.
             \end{itemize} 
             \item Compare `coverage' of the policy (here coverage refers to the proportion of the total state space considered by the solver) \label{itm:i2}
             \begin{itemize}
                 \item Merits: Evaluates how `thorough' the policy is; in concert with \ref{itm:i1} could address \ref{itm:d1}
-                \item Demerits: Does not meet \ref{itm:d2} because not all policies will have the same coverage; which is typically by design. Also high coverage does not imply a `good' solution
+                \item Demerits: Doesn't satisfy \ref{itm:d2}---not all policies have the same coverage, typically by design. Also, high coverage does not imply a `good' solution
             \end{itemize}
             \item Compare the reward distribution of given policies \label{itm:i3}
             \begin{itemize}
