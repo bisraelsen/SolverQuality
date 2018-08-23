@@ -62,11 +62,19 @@ Admittedly, having $r$ much less than the variance of \solve{} and \solvestar{} 
 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.9\linewidth]{Figures/p1}\\
-    \vspace{0.2cm}
-    Associated \xQ{} Values\\
-    \vspace{0.1cm}
-    \includegraphics[width=0.6\linewidth]{Figures/p1_table}\\
+    \begin{subfigure}[c]{0.65\linewidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{Figures/p1.pdf}
+        \vfill
+        % \caption{tst}
+        \label{fig:roadnet}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[t]{0.35\linewidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{Figures/p1_table.pdf}
+        % \caption{Candidate solver depth 1}
+        \label{fig:med_roadnet}
+    \end{subfigure} 
     \caption{\xQ{} calculation on example reward distributions: \solvestar{} (blue) and \solve{} (red) over a range of values of some task/solver parameter. Points of interest are indicated with a star.}
-    \label{fig:sq_thry1}
 \end{figure}
