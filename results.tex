@@ -20,16 +20,16 @@ The road network is represented as shown in Fig.~\ref{fig:roadnet}. The UGV begi
 \hline
 Parameter    & Description\\
 \hline
-p_{trans}    & The transition probability of the UGV. This is the probability that the UGV will move in the desired direction when attempting to move. There is a probability of $1-t_prob$ that it will go to a different neighboring cell. \\
-d            & MDP discount factor\\
-N            & The number of nodes included in the road\\
+$p_{trans}$    & The transition probability of the UGV. This is the probability that the UGV will move in the desired direction when attempting to move. There is a probability of $1-t_prob$ that it will go to a different neighboring cell. \\
+$d$            & MDP discount factor\\
+$N$            & The number of nodes included in the road\\
 % Mean Degree  & The target mean degree to which random networks are generated\\
-e_{mcts}     & The exploration constant parameter of the MCTS.\\
-d_{mcts}     & The depth of the MCTS tree\\
-its_{mcts}   & The number of Monte-Carlo simulations to run to find the policy\\
-rwd_{exit}   & The reward for the UGV successfully exiting the road network\\
-rwd_{caught} & The reward for the UGV being caught by the pursuer\\
-rwd_{sense}  & The reward for making a movement\\
+$e_{mcts}$     & The exploration constant parameter of the MCTS.\\
+$d_{mcts}$     & The depth of the MCTS tree\\
+$its_{mcts}$   & The number of Monte-Carlo simulations to run to find the policy\\
+$rwd_{exit}$   & The reward for the UGV successfully exiting the road network\\
+$rwd_{caught}$ & The reward for the UGV being caught by the pursuer\\
+$rwd_{sense}$  & The reward for making a movement\\
 \hline
 \end{tabulary}
 \end{table}
@@ -40,11 +40,11 @@ rwd_{sense}  & The reward for making a movement\\
     \label{tab:exps}
     \begin{tabular}{llcccccccccc} \toprule
         &\multicolumn{10}{c}{Parameters} \\ \cmidrule(r){3-12}
-        \#  & Variable(s) & Network &p_{trans}&d&N&e_{mcts}&d_{mcts}&its_{mcts}&rwd_{exit}&rwd_{caught}&rwd_{sense} \\ \midrule
-        1 & \{d_{mcts}\} & Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[1000.0]$ & [1:1:10] & 100 & 2000 & -2000 & -100\\
-        2 & \{d_{mcts}\} & Fig.~\ref{fig:med_roadnet} & $[0.0,1.0]$ & $0.95$ & 45 & $[2000.0]$ & [1:3:28] & 1000 & 2000 & -2000 & -100\\
-        3 & \{p_{trans}\}& Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[1000.0]$ & [8,3,1] & 1000 & 2000 & -2000 & -100\\
-        4 & \{p_{trans},e_{mcts}\} & Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[10.0,1000.0]$ & [8,3,1] & 1000 & 2000 & -2000 & -100\\
+        \#  & Variable(s) & Network &$p_{trans}$&$d$&$N$&$e_{mcts}$&$d_{mcts}$&$its_{mcts}$&$rwd_{exit}$&$rwd_{caught}$&$rwd_{sense}$ \\ \midrule
+        1 & ${d_{mcts}}$ & Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[1000.0]$ & $[1:1:10]$ & 100 & 2000 & -2000 & -100\\
+        2 & ${d_{mcts}}$ & Fig.~\ref{fig:med_roadnet} & $[0.0,1.0]$ & $0.95$ & 45 & $[2000.0]$ & $[1:3:28]$ & 1000 & 2000 & -2000 & -100\\
+        3 & ${p_{trans}}$& Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[1000.0]$ & $[8,3,1]$ & 1000 & 2000 & -2000 & -100\\
+        4 & ${p_{trans},e_{mcts}}$ & Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[10.0,1000.0]$ & $[8,3,1]$ & 1000 & 2000 & -2000 & -100\\
     \end{tabular}
 \end{table*}
 

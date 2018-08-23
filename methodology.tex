@@ -16,7 +16,7 @@ Figure \ref{fig:sq_v2} is a conceptual figure illustrating some of the key compo
 The surrogate model \surrogate{} can be any model capable of predicting \rwdstarapprox{} given \task. In the formulation presented above \rwdstariapprox{} only represents the mean and standard deviation for \rwdstari{} (this makes the learning problem less complicated, but is not necessary). Figure \ref{fig:sq_train} depicts how the surrogate model is trained. Learning \surrogate{} would typically be done `offline' when more computation power and time are available.
 
 \subsection{Calculating \xQ}
-In order to compare two solvers we compare the resultant reward distributions that each of those solvers produce (as stated in Sec.~\ref{sec:compare_policies}). If two solvers produce an identical reward distribution \emph{for a given task}, then they can be considered equal in their `quality', or considered equally `capable'. Conversely, if the two distributions are very different (for the same task) then their quality, or capability, is also different. Following, the detailed components of the \xQ~ formulation are discussed, refer to Fig.~\ref{fig:sq_v2} for a visual 
+In order to compare two solvers we compare the resultant reward distributions that each of those solvers produce (as stated in Sec.~\ref{sec:compare_policies}). If two solvers produce an identical reward distribution \emph{for a given task}, then they can be considered equal in their `quality', or considered equally `capable'. Conversely, if the two distributions are very different (for the same task) then their quality, or capability, is also different. Following, the detailed components of the \xQ{} formulation are discussed, refer to Fig.~\ref{fig:sq_v2} for a visual 
 
 \subsubsection{Hellinger Metric} \label{sec:hellinger}
 Perhaps the easiest way of calculating the similarity between distributions is to find the `distance' between them. The Hellinger metric is such a measure, and is \emph{bounded} between 0 and 1, where 0 means the distributions are identical. The maximum distance, 1, is achieved when distribution $P$ assigns zero probability at every point in which distribution $Q$ assigns probability.  The Hellinger distance has different forms based on the type of analytical distributions being compared. For the purposes of calculating \xQ{} the from for two Normal distributions ($P \sim \mathcal{N}(\mu_1,\sigma_1), Q\sim\mathcal{N}(\mu_2,\sigma_2)$) is useful:
@@ -40,7 +40,7 @@ Using the points discussed above the expression for the quality of candidate sol
     \text{q} &= \text{sgn}(\Delta \mu)f^{\alpha}\sqrt{H_{\mathcal{N}}^{2}(T,C)} \label{eq:q}
 \end{align}
 
-Where $\Delta \mu &= \mu_c-\mu_t$, and $f &= \Delta \mu/(r_H-r_L)$. The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. In essence, should the relationship of the effects of $f$ and $H_{\mathcal{N}}$ be $1:1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{q}$ as $f$ grows smaller, and $f$ should be more influential as it increases. The effects of different values of $\alpha$ are illustrated in Figure \ref{fig:alphas}. We have found $\alpha=1/2$ gives results that `make sense' to users; future work could investigate the `best' value for $\alpha$ via user studies.
+Where $\Delta \mu = \mu_c-\mu_t$, and $f = \Delta \mu/(r_H-r_L)$. The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to $H_{\mathcal{N}}$. In essence, should the relationship of the effects of $f$ and $H_{\mathcal{N}}$ be $1:1$? In practice $\alpha=1$ does not yield desirable results. Hellinger distance should be more influential on $\text{q}$ as $f$ grows smaller, and $f$ should be more influential as it increases. The effects of different values of $\alpha$ are illustrated in Figure \ref{fig:alphas}. We have found $\alpha=1/2$ gives results that `make sense' to users; future work could investigate the `best' value for $\alpha$ via user studies.
 
 In the current formulation, when calculating \xQ, Normal distributions are not required. Instead, each distribution must only have a known mean, and variance. In essence, even though the distributions being compared may not be Normal, they are treated as Normal by using the mean and standard deviation as their sufficient statistics.
 
@@ -56,24 +56,26 @@ A toy example is useful in evaluating whether \xQ{} yields desirable results. Fi
 
 At B the candidate solver has a lower expected reward than the trusted solver and a higher variance than the trusted solver. Intuitively \xQ{} should be less than one. As shown when $r=5$ (i.e. $r_H-r_L=5$, the global reward range is `large') $x_Q=0.667$ which indicates that the candidate solver is marginally less capable than the trusted solver, and when $r=0.05$ then $x_Q=0.002$ indicates that \solve{} is much less capable than \solvestar.
 
-At C the candidate solver \solve{} has higher expected reward than \solverstar, but a larger variance. Intuitively we would expect \xQ{} of \solve{} to be a little greater than one, and in fact when $r=5$, $x_Q=1.095$. As the global reward range $r$ decreases the difference in capability between \solve{} and \solvestar{} increases with $x_Q=1.995$ at $r=0.005$.
+At C the candidate solver \solve{} has higher expected reward than \solvestar, but a larger variance. Intuitively we would expect \xQ{} of \solve{} to be a little greater than one, and in fact when $r=5$, $x_Q=1.095$. As the global reward range $r$ decreases the difference in capability between \solve{} and \solvestar{} increases with $x_Q=1.995$ at $r=0.005$.
 
 Admittedly, having $r$ much less than the variance of \solve{} and \solvestar{} doesn't make a lot of sense in reality, but it illustrates that \xQ{} behaves as expected mathematically. In Sec.~\ref{sec:results} a more realistic scenario is considered.
 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.9\linewidth]{Figures/p1}
+    \includegraphics[width=0.9\linewidth]{Figures/p1}\\
+    % \vspace{0.2cm}
+    % \includegraphics[width=0.8\linewidth]{Figures/p1_table}\\
     \caption{Example reward distributions of trusted solver (blue) and candidate solver(red) over a range of values of some task parameter. Points of interest are indicated with a star.}
     \label{fig:sq_thry1}
 \end{figure}
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.9\linewidth]{Figures/p3}\\
-    \vspace{0.3cm}
-    \includegraphics[width=0.9\linewidth]{Figures/p4}
-    \caption{Example of expected rewards of solvers versus variation of a problem parameter at locations B (top) and C (bottom). Values of \xQ{} are calculated for some different global ranges $r=r_H-r_L$ of rewards as indicated in each figure.}
-    \label{fig:sq_thry2}
-\end{figure}
+% \begin{figure}[tbp]
+    % \centering
+    % \includegraphics[width=0.9\linewidth]{Figures/p3}\\
+    % \vspace{0.3cm}
+    % \includegraphics[width=0.9\linewidth]{Figures/p4}
+    % \caption{Example of expected rewards of solvers versus variation of a problem parameter at locations B (top) and C (bottom). Values of \xQ{} are calculated for some different global ranges $r=r_H-r_L$ of rewards as indicated in each figure.}
+    % \label{fig:sq_thry2}
+% \end{figure}
 % \begin{figure}[tbp]
     % \centering
     % \includegraphics[width=0.9\linewidth]{Figures/p2}
