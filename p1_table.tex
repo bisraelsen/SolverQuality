@@ -1,0 +1,24 @@
+\documentclass{standalone}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{mathtools}%loads amsmath
+\usepackage{amssymb,amsfonts}
+\newcommand{\xQ}{$x_Q$} %solver quality
+
+\begin{document}
+    \begin{table}[]
+    \centering
+    \footnotesize
+    % \caption{Calculated \xQ}
+    % \label{tab:sq_thry1}
+    \begin{tabular}{@{}lllll@{}}
+    \toprule
+    \multirow{2}{*}{\xQ} & \multicolumn{4}{c}{Point of Interest} \\ \cmidrule(l){2-5} 
+     & A & B & C & D \\ \cmidrule(r){1-1}
+    \xQ(r=5.0) & 0.998 & 0.667 & 1.095 & 1.351 \\
+    \xQ(r=0.5) & 0.994 & 0.215 & 1.291 & 1.821 \\
+    \xQ(r=0.05) & 0.981 & 0.002 & 1.739 & 1.999 \\
+    \xQ(r=0.005) & 0.940 & 0.000 & 1.995 & 2.000 \\ \bottomrule
+    \end{tabular}
+    \end{table}
+\end{document}
