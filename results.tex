@@ -5,10 +5,29 @@ In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver w
 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.4\linewidth]{Figures/original_roadnet.png}
-    \caption{Diagram of the `Road Network' layout. Node 1 (yellow) is the start location of the UGV. Node 4 (red) is the start location of the pursuer vehicle. Node 13 (green) is the exit node.}
-    \label{fig:roadnet}
+    \begin{subfigure}[b]{0.50\linewidth}
+        \centering
+        \includegraphics[width=0.7\linewidth]{Figures/original_roadnet.png}
+        \vfill
+        \caption{Road network N=13}
+        \label{fig:roadnet}
+    \end{subfigure}%
+    \hfill
+    \begin{subfigure}[b]{0.50\linewidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{Figures/medium_roadnet.png}
+        \caption{Road network N=45}
+        \label{fig:med_roadnet}
+    \end{subfigure} 
+    \caption{Two example road networks. UGV begins at yellow node, Pursuer beings at red node, and the exit is located at the green node.}
 \end{figure}
+% \begin{figure}[tbp]
+    % \centering
+    % \includegraphics[width=0.4\linewidth]{Figures/medium_roadnet.png}
+    % \caption{Diagram of a randomly generated road network with that is quite a bit larger ($N=45$) than the original shown in Figure \ref{fig:roadnet}.}
+    % \label{fig:med_roadnet}
+% \end{figure}
+
 
 The road network is represented as shown in Fig.~\ref{fig:roadnet}. The UGV begins at the yellow node (node 1), the pursuer begins at the red node (node 4), and the desired exit is indicated by the green node (node 13). The problem is defined by the following parameters:
 
@@ -58,13 +77,6 @@ The results for experiment 1 are shown in Fig.~\ref{fig:mcts_d}. As expected \xQ
 The results of experiment 2 are shown in Fig.~\ref{fig:mcts_d_med}, where the trusted solver with $d_{mcts}=5$ has been selected. According to the plot only solvers of depth 22, and 28 have similar capability to the trusted solver. Note, that the $d_{mcts}=1$ solver has $x_Q=0.83$, this is most possibly due to the fact that the depth 1 solver will make decisions based on little foresight, while solver with depths from 4 to 19 have enough foresight to hesitate and accumulate negative rewards from not moving quickly.
 
 An important insight is that while the $d_{mcts}=9$ solver is very capable of solving the small network from Fig.~\ref{fig:roadnet}, that performance does not extent to the medium sized network from Fig.~\ref{fig:med_roadnet}. The $d_{mcts}=7 \text{ and} 10$ solvers are very incapable compared to the trusted solver of $d_{mcts}=25$, this is reflected by the value of \xQ.
-
-\begin{figure}[tbp]
-    \centering
-    \includegraphics[width=0.4\linewidth]{Figures/medium_roadnet.png}
-    \caption{Diagram of a randomly generated road network with that is quite a bit larger ($N=45$) than the original shown in Figure \ref{fig:roadnet}.}
-    \label{fig:med_roadnet}
-\end{figure}
 
 \begin{figure}[tbp]
     \centering
