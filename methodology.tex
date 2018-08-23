@@ -7,24 +7,16 @@ Figure \ref{fig:sq_v2} is a conceptual figure illustrating some of the key compo
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=0.55\linewidth]{Figures/SQ_train.png}
-    \caption{Figure displaying that \surrogate{} is use to predict a distribution  \rwdstariapprox{} that matches the first and second moments of \rwdstari}
+    \includegraphics[width=0.95\linewidth]{Figures/SQ_train_test.png}
+    \caption{Depiction of the training phase of the surrogate function \surrogate, and the test, or online deployment, phase where \xQ{} is calculated.}
     \label{fig:sq_train}
 \end{figure}%
-
-\begin{figure}[tb]
-    \centering
-    \includegraphics[width=0.6\linewidth]{Figures/SQ_test.png}
-    \caption{During testing \surrogate{} is used to predict \rwdstarapprox{}, \xQ{} is then calculated using \rwd{}.}
-    \label{fig:sq_test}
-\end{figure}
-
 
 \subsection{Learning \surrogate}
 The surrogate model \surrogate{} can be any model capable of predicting \rwdstarapprox{} given \task. In the formulation presented above \rwdstariapprox{} only represents the mean and standard deviation for \rwdstari{} (this makes the learning problem less complicated, but is not necessary). Figure \ref{fig:sq_train} depicts how the surrogate model is trained. Learning \surrogate{} would typically be done `offline' when more computation power and time are available.
 
 \subsection{Calculating \xQ}
-In order to compare two solvers we compare the resultant reward distributions that each of those solvers produce (as stated in Sec.~\ref{sec:compare_policies}. If two solvers produce an identical reward distribution \emph{for a given task}, then they can be considered equal in their `quality', or considered equally `capable'. Conversely, if the two distributions are very different (for the same task) then their quality, or capability, is also different.
+In order to compare two solvers we compare the resultant reward distributions that each of those solvers produce (as stated in Sec.~\ref{sec:compare_policies}). If two solvers produce an identical reward distribution \emph{for a given task}, then they can be considered equal in their `quality', or considered equally `capable'. Conversely, if the two distributions are very different (for the same task) then their quality, or capability, is also different. Following, the detailed components of the \xQ~ formulation are discussed, refer to Fig.~\ref{fig:sq_v2} for a visual 
 
 \subsubsection{Hellinger Metric} \label{sec:hellinger}
 Perhaps the easiest way of calculating the similarity between distributions is to find the `distance' between them. The Hellinger metric is such a measure, and is \emph{bounded} between 0 and 1, where 0 means the distributions are identical. The maximum distance, 1, is achieved when distribution $P$ assigns zero probability at every point in which distribution $Q$ assigns probability.  The Hellinger distance has different forms based on the type of analytical distributions being compared. For the purposes of calculating \xQ{} the from for two Normal distributions ($P \sim \mathcal{N}(\mu_1,\sigma_1), Q\sim\mathcal{N}(\mu_2,\sigma_2)$) is useful:
@@ -52,7 +44,7 @@ Where $\Delta \mu &= \mu_c-\mu_t$, and $f &= \Delta \mu/(r_H-r_L)$. The exponent
 
 In the current formulation, when calculating \xQ, Normal distributions are not required. Instead, each distribution must only have a known mean, and variance. In essence, even though the distributions being compared may not be Normal, they are treated as Normal by using the mean and standard deviation as their sufficient statistics.
 
-\subsubsection{Accomodations For Humans}
+\subsubsection{Accommodations For Humans}
 While the Hellinger distance is on the domain $[0,1]$, the quantity $f$ from Eq. \ref{eq:f} is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep \xQ{} value within some range and avoid arbitrarily large values that can be confusing to humans. The general logistic equation is useful for this.
 We use $L=2$ so that when $s=0$ (distributions are identical) \xQ{} will be 1. The parameter $k$ is selected to be $5$ so that \xQ{} `saturates' at around $\text{q}=\pm1$.
 \begin{align}
@@ -71,7 +63,7 @@ Admittedly, having $r$ much less than the variance of \solve{} and \solvestar{} 
 \begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/p1}
-    \caption{Toy example depicting the reward distributions of a trusted solver (in blue) and a candidate solver(in red) over a range of values of some task parameter. Points of interest are indicated with a star.}
+    \caption{Example reward distributions of trusted solver (blue) and candidate solver(red) over a range of values of some task parameter. Points of interest are indicated with a star.}
     \label{fig:sq_thry1}
 \end{figure}
 \begin{figure}[tbp]
