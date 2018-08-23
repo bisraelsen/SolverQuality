@@ -1,7 +1,7 @@
 \section{Methodology}
 How, then, can \xQ{} be calculated? Following from discussion in the previous section a surrogate model, \surrogate{}, can be learned to predict the reward distribution \rwdstarapprox{} of the trusted reference solver \solvestar{} on task \task{}.
 
-The candidate solver \solve{} must then be evaluated w.r.t. the trusted solver \solvestar{}. This is done by comparing \rwdstarapprox{} (the predicted performance of \solvestar{} on task \task) and \rwd{} (the simulated performance of solver \solve{} on task \task). Figure \ref{fig:sq_test} depicts this procedure.
+The candidate solver \solve{} must then be evaluated w.r.t. the trusted solver \solvestar{}. This is done by comparing \rwdstarapprox{} (the predicted performance of \solvestar{} on task \task) and \rwd{} (the simulated performance of solver \solve{} on task \task). Figure \ref{fig:sq_train_test} depicts this procedure.
 
 Figure \ref{fig:sq_v2} is a conceptual figure illustrating some of the key components involved in calculating \xQ. The basic premise is simple: \emph{find the difference between the trusted solver ($T$) and the candidate solver ($C$) while taking into account which solver has move expected reward, and the overall range of rewards of the trusted solver over many tasks}.
 
@@ -63,25 +63,8 @@ Admittedly, having $r$ much less than the variance of \solve{} and \solvestar{} 
 \begin{figure}[tbp]
     \centering
     \includegraphics[width=0.9\linewidth]{Figures/p1}\\
-    % \vspace{0.2cm}
-    % \includegraphics[width=0.8\linewidth]{Figures/p1_table}\\
+    \vspace{0.2cm}
+    \includegraphics[width=0.8\linewidth]{Figures/p1_table}\\
     \caption{Example reward distributions of trusted solver (blue) and candidate solver(red) over a range of values of some task parameter. Points of interest are indicated with a star.}
     \label{fig:sq_thry1}
 \end{figure}
-% \begin{figure}[tbp]
-    % \centering
-    % \includegraphics[width=0.9\linewidth]{Figures/p3}\\
-    % \vspace{0.3cm}
-    % \includegraphics[width=0.9\linewidth]{Figures/p4}
-    % \caption{Example of expected rewards of solvers versus variation of a problem parameter at locations B (top) and C (bottom). Values of \xQ{} are calculated for some different global ranges $r=r_H-r_L$ of rewards as indicated in each figure.}
-    % \label{fig:sq_thry2}
-% \end{figure}
-% \begin{figure}[tbp]
-    % \centering
-    % \includegraphics[width=0.9\linewidth]{Figures/p2}
-    % \includegraphics[width=0.9\linewidth]{Figures/p3}
-    % \includegraphics[width=0.9\linewidth]{Figures/p4}
-    % \includegraphics[width=0.9\linewidth]{Figures/p5}
-    % \caption{Example of expected rewards of solvers versus variation of a problem parameter. Values of \xQ{} are calculated for some different global ranges $r$ of rewards.}
-    % \label{fig:sq_thry2}
-% \end{figure}
