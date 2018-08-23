@@ -80,7 +80,7 @@ An important insight is that while the $d_{mcts}=9$ solver is very capable of so
 \end{figure}
 
 \subsection{Varying A Task Parameter}
-Experiment 3 was used for this evaluation, \solverstar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. The surrogate model \surrogate{} was learned using a two generic deep neural networks  with three hidden layers. One network to learn to predict the mean reward, and the other to predict the standard deviation (\surrogate{} here is a combination two models). In a fairly simple problem such as this one a DNN of this configuration is likely overkill, but it demonstrates the possibility of using an arbitrarily complex black box model for \surrogate.
+Experiment 3 was used for this evaluation, \solvestar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. The surrogate model \surrogate{} was learned using a two generic deep neural networks  with three hidden layers. One network to learn to predict the mean reward, and the other to predict the standard deviation (\surrogate{} here is a combination two models). In a fairly simple problem such as this one a DNN of this configuration is likely overkill, but it demonstrates the possibility of using an arbitrarily complex black box model for \surrogate.
 
 Figure~\ref{fig:tprob_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
 
@@ -100,7 +100,7 @@ Figure~\ref{fig:tprob_bad} shows the results for the candidate solver with $d_{m
 \end{figure}
 
 \subsection{Varying Task and Solver Parameters}
-Experiment 4 was used for this evaluation, \solverstar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. Both $p_{trans}$ and $e_{mcts}$ were variable for the experiments. The results are found in Figs.~\ref{fig:tprob_emcts_ok} and \ref{fig:tprob_emcts_bad}. The surrogate \surrogate{} used here is the same as in the previous evaluation (i.e. two DNNs to predict mean and standard deviation).
+Experiment 4 was used for this evaluation, \solvestar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. Both $p_{trans}$ and $e_{mcts}$ were variable for the experiments. The results are found in Figs.~\ref{fig:tprob_emcts_ok} and \ref{fig:tprob_emcts_bad}. The surrogate \surrogate{} used here is the same as in the previous evaluation (i.e. two DNNs to predict mean and standard deviation).
 
 Figure~\ref{fig:tprob_emcts_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
 
