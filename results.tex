@@ -1,7 +1,7 @@
 \section{Results} \label{sec:results}
 In order to investigate how \xQ{} performs on a more realistic scenario the VIP escort problem introduced in Sec.~\ref{sec:vip_escort} will be used. While the original problem is defined as a POMDP, here we investigate a somewhat simpler version of the problem, and instead use fully observable MDPs. This is reasonable because \xQ{} operates on reward distributions, which are produced by policies on any decision making problem. The benefit of using MDPs is that they are computationally less burdensome than POMDPs, while still being capable of being applied to complex decision problems.
 
-In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver will be used \cite{Browne2012-fo}. As the name suggests MCTS involves building a tree from the starting state of the UGV and simulating a specified number of actions/transitions into the future in order to calculate the utility of each state. This process is repeated many times, and the utilities of each state are updated after each iteration. The actions selected by MCTS are based not only on the current utility of the state, but an exploration parameter that helps ensure that the search doesn't simply exploit the greatest known utilities. An MCTS solver is convenient to use during these experiments because the quality of the solver can be easily changed by modifying the parameters.
+In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver will be used \cite{Browne2012-lj}. As the name suggests MCTS involves building a tree from the starting state of the UGV and simulating a specified number of actions/transitions into the future in order to calculate the utility of each state. This process is repeated many times, and the utilities of each state are updated after each iteration. The actions selected by MCTS are based not only on the current utility of the state, but an exploration parameter that helps ensure that the search doesn't simply exploit the greatest known utilities. An MCTS solver is convenient to use during these experiments because the quality of the solver can be easily changed by modifying the parameters.
 
 \begin{figure}[tbp]
     \centering
@@ -78,7 +78,7 @@ An important insight is that while the $d_{mcts}=9$ solver is very capable of so
     \centering
     \begin{subfigure}[b]{0.98\linewidth}
         \centering
-        \includegraphics[width=0.9\linewidth]{Figures/sq_roadnet_mcts_i100e1000.pdf}
+        \includegraphics[width=1.0\linewidth]{Figures/sq_roadnet_mcts_i100e1000.pdf}
         \vfill
         \caption{Experiment 1}
         \label{fig:mcts_d}
@@ -86,7 +86,7 @@ An important insight is that while the $d_{mcts}=9$ solver is very capable of so
     \hfill
     \begin{subfigure}[b]{0.98\linewidth}
         \centering
-        \includegraphics[width=0.9\linewidth]{Figures/sq_mednet_mcts_i1000e2000.pdf}
+        \includegraphics[width=1.0\linewidth]{Figures/sq_mednet_mcts_i1000e2000.pdf}
         \caption{Experiment 2}
         \label{fig:mcts_d_med}
     \end{subfigure} 
@@ -132,7 +132,7 @@ Figure~\ref{fig:tprob_emcts_bad} shows the results for \solve{} with $d_{mcts}=1
     \centering
     \begin{subfigure}[b]{0.98\linewidth}
         \centering
-        \includegraphics[width=0.75\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
+        \includegraphics[width=0.8\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
         \vfill
         \caption{Candidate solver depth 3}
         \label{fig:tprob_emcts_ok}
@@ -140,10 +140,10 @@ Figure~\ref{fig:tprob_emcts_bad} shows the results for \solve{} with $d_{mcts}=1
     \hfill
     \begin{subfigure}[b]{0.98\linewidth}
         \centering
-        \includegraphics[width=0.75\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
+        \includegraphics[width=0.8\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
         \caption{Candidate solver depth 1}
         \label{fig:tprob_emcts_bad}
     \end{subfigure}
     \caption{Comparison of \solve{} to \solvestar{} of depth 8. The top-left shows the mean reward of \solvestar{}, the bottom-left is the std. of \solvestar{}. Figures on RHS show \xQ{} (SQ) at points A, and B.}
-    \vspace{-0.7cm}
+    \vspace{-0.5cm}
 \end{figure}

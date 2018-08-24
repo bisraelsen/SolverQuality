@@ -56,7 +56,7 @@ Furthermore, the five factors considered here are neither exclusive nor exhausti
 
 We will use the VIP Escort scenario to examine two immediate questions: (i) how should the factors be expected to behave under different conditions (independently of how they are actually calculated)?, and (ii) how should any one these factors actually be calculated?  
 
-To address (i), we should first consider what kinds of trends, `boundary conditions', and interactions are expected for the various factors if we are given some class of solver for the underlying UGV motion planning problem. For instance, if the problem were modeled and encoded as a discrete-time/discrete-space MDP, then sampling-based Monte Carlo solvers could be used to find an approximately optimal policy $\pi$, which would map joint UGV- chaser state information onto specific UGV actions to maximize the UGV's expected cumulative reward. Figure \ref{fig:trendsBCs} shows some expected behaviors for the \famsec{} factors for such a solver, as a function of task, environment, system, and context, assuming again an arbitrary finite range of -1 (total lack of confidence) to +1 (complete confidence) for illustration only. For instance, \xQ{} would be expected to increase/decrease as the number of samples used by the Monte Carlo solver to approximate $\pi$ increased/decreased. Similar trends could also be derived for other non-sampling based solvers.  %\nisar{mention about traceability/drill down basis here?}
+To address (i), we should first consider what kinds of trends, `boundary conditions', and interactions are expected for the various factors if we are given some class of solver for the underlying UGV motion planning problem. For instance, if the problem were modeled and encoded as a discrete-time/discrete-space MDP, then sampling-based Monte Carlo solvers could be used to find an approximately optimal policy $\pi$ \cite{Browne2012-lj}, which would map joint UGV- chaser state information onto specific UGV actions to maximize the UGV's expected cumulative reward. Figure \ref{fig:trendsBCs} shows some expected behaviors for the \famsec{} factors for such a solver, as a function of task, environment, system, and context, assuming again an arbitrary finite range of -1 (total lack of confidence) to +1 (complete confidence) for illustration only. For instance, \xQ{} would be expected to increase/decrease as the number of samples used by the Monte Carlo solver to approximate $\pi$ increased/decreased. Similar trends could also be derived for other non-sampling based solvers.  %\nisar{mention about traceability/drill down basis here?}
 \begin{figure}[tbp]
     \centering
     \includegraphics[width=0.99\linewidth]{Figures/scTrendsBoundaryExample.png}
@@ -138,7 +138,7 @@ By indicating how likely favorable outcomes are expected relative to unfavorable
         
    \begin{figure}[tb]
         \centering
-        \includegraphics[width=0.75\linewidth]{Figures/sq_v2_fig-crop}
+        \includegraphics[width=0.9\linewidth]{Figures/sq_v2_fig-crop}
         \caption{Key values involved in calculating \xQ, where $x$ represents a `parameter of interest' for task \task, or solver \solve.}
         \label{fig:sq_v2}
         \vspace{-0.2cm}
