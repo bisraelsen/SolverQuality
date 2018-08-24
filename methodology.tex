@@ -32,13 +32,13 @@ Figure \ref{fig:sq_v2} illustrates some of the key quantities involved in calcul
 \end{figure}
 
 \subsection{Learning \surrogate}
-The surrogate model \surrogate{} can be any model capable of predicting \rwdstarapprox{} given \task. In the formulation presented above \rwdstariapprox{} only represents the mean and standard deviation for \rwdstari{} (this makes the learning problem less complicated, but is not necessary). Figure \ref{fig:sq_train} depicts how the surrogate model is trained. Learning \surrogate{} would typically be done `offline' when more computation power and time are available.
+The surrogate model \surrogate{} can be any model capable of predicting \rwdstarapprox{} given \task. In the formulation presented above \rwdstariapprox{} only represents the mean and standard deviation for \rwdstari{} (this makes the learning problem less complicated, but is not necessary). Figure \ref{fig:sq_train} depicts how the surrogate model is trained. Learning \surrogate{} would typically be done `offline' and in a supervised manner when more computation power and time are available. Later \surrogate{} can be deployed for use on an APS.
 
 \subsection{Calculating \xQ}
-In order to compare two solvers the resultant reward distributions that each of those solvers produce are compared (as discussed in Sec.~\ref{sec:compare_policies}). If two solvers produce an identical reward distribution \emph{for a given task}, then they can be considered equal in their `quality', or considered equally `capable'. Conversely, if the two distributions are very different (for the same task) then their quality, or capability, is also different.
+In order to compare two solvers the resultant reward distributions that each of those solvers produce are compared. If two solvers produce an identical reward distribution \emph{for a given task}, then they can be considered equal in their `quality', or considered equally `capable'. Conversely, if the two distributions are very different \emph{for the same task}, then their quality, or capability, is also different.
 
 \subsubsection{Hellinger Metric $\bm{H^2}$} \label{sec:hellinger}
-Perhaps the easiest way of calculating the similarity between distributions is to find the `distance' between them, the Hellinger metric (\hell) is such a measure. It is \emph{bounded} between 0 and 1, where 0 means the distributions are identical. The maximum distance, 1, is achieved when one distribution $P$ assigns zero probability at every point in which another distribution $Q$ assigns probability. \hell{} has different forms based on the type of analytical distributions being compared. For the purposes of calculating \xQ{} the from two distributions $P \sim (\mu_1,\sigma_1)$ and $Q\sim(\mu_2,\sigma_2)$ the following form is useful:
+Perhaps the easiest way of calculating the similarity between distributions is to find the `distance' between them, the Hellinger metric (\hell) is such a measure. It is bounded between 0 and 1, where 0 means the distributions are identical. The maximum distance, 1, is achieved when one distribution $P$ assigns zero probability at every point in which another distribution $Q$ assigns probability. \hell{} has different forms based on the type of analytical distributions being compared. For the purposes of calculating \xQ{} from two distributions $P \sim (\mu_1,\sigma_1)$ and $Q\sim(\mu_2,\sigma_2)$ the following form is useful:
 \begin{align}
     H^{2}(P,Q) = 1-\sqrt{\frac{2\sigma_P\sigma_Q}{\sigma_P^2+\sigma_Q^2}}\exp{\left(-\frac{1}{4}\frac{(\mu_P-\mu_Q)^2}{\sigma_P^2+\sigma_Q^2}\right)}
 \end{align}
@@ -59,17 +59,15 @@ Using the points discussed above the expression for the quality of candidate sol
 
 Where $\Delta \mu = \mu_c-\mu_t$, and $f = \Delta \mu/(r_H-r_L)$. The exponent $\alpha$ is a parameter that affects the influence that $f$ has with respect to \hell. In essence, should the relationship of the effects of $f$ and \hell{} be $1:1$? In practice $\alpha=1$ does not yield desirable results. \hell{} should be more influential on $\text{q}$ as $f$ grows smaller, and $f$ should be more influential as it increases. We have found $\alpha=1/2$ gives results that `make sense'; future work could investigate the `best' value for $\alpha$ via user studies.
 
-As formulated the only requirement of reward distributions T and C is that they have a known mean and standard deviation. In essence \xQ{} is a measure of the distance of two arbitrary distributions using only their first two moments.
-
 \subsubsection{Accommodations For Humans}
-While \hell{} is on the domain $[0,1]$, the quantity $f$ is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep \xQ{} value within some bounded range and avoid arbitrarily large values that can be confusing to humans. The general logistic equation is useful for this.
-The numerator is 2 so that when $q=0$ (distributions are identical) \xQ{} will be 1. Dividing the quantity $q$ is divided by 5 so that so that \xQ{} `saturates' at around $\text{q}=\pm1$.
+While \hell{} is on the domain $[0,1]$, the quantity $f$ is $[0,\infty]$. Because of this it is desirable to use a `squashing function' to keep the reported \xQ{} value within some bounded range and avoid arbitrarily large values that can be confusing to humans. The general logistic equation is useful for this.
+The numerator is 2 so that when $q=0$ (distributions are identical) \xQ{} will be 1. Dividing the quantity $q$ by 5 so makes it so that \xQ{} `saturates' at around $\text{q}=\pm1$.
 \begin{align}
     x_{Q} &= \frac{2}{1+exp(-\text{q}/5)}\label{eq:SQ}
 \end{align}
 
 \subsection{Examples}
-A toy example is useful in evaluating whether \xQ{} yields desirable results. Figure~\ref{fig:sq_thry1} illustrates a toy example showing the expected reward (with uncertainty) for a trusted solver \solvestar{} given a specific, generic, task parameter, as well as that of a `candidate' solver \solve. Different points of interest (indicating specific values of the task parameter) are highlighted by a star. The table on the side shows the values of \xQ{} calculated for different cases.
+A toy example is useful in evaluating whether \xQ{} yields desirable results. Figure~\ref{fig:sq_thry1} illustrates a such an example, depicting the expected reward (with uncertainty) for a trusted solver \solvestar{} given a specific, generic, task/solver parameter, as well as that of a `candidate' solver \solve. Different points of interest (indicating specific values of the task parameter) are highlighted by a star. The table on the side shows the values of \xQ{} calculated for different cases.
 
 At B the candidate solver has a lower expected reward than the trusted solver and a higher variance than the trusted solver. Intuitively \xQ{} should be less than one. As shown when $r=5$ (i.e. $r_H-r_L=5$, the global reward range is `large') $x_Q=0.667$ which indicates that the candidate solver is marginally less capable than the trusted solver, and when $r=0.05$ then $x_Q=0.002$ indicates that \solve{} is much less capable than \solvestar.
 
