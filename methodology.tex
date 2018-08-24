@@ -15,7 +15,7 @@ Figure \ref{fig:sq_v2} illustrates some of the key quantities involved in calcul
     \centering
     \begin{subfigure}[c]{0.50\linewidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/SQ_train.png}
+        \includegraphics[width=0.75\linewidth]{Figures/SQ_train.png}
         \vfill
         \caption{Offline Training}
         \label{fig:sq_train}
@@ -23,12 +23,13 @@ Figure \ref{fig:sq_v2} illustrates some of the key quantities involved in calcul
     \hfill
     \begin{subfigure}[c]{0.50\linewidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/SQ_test.png}
+        \includegraphics[width=0.75\linewidth]{Figures/SQ_test.png}
         \caption{Online Deployment}
         \label{fig:sq_test}
     \end{subfigure} 
     \caption{Depiction of the training phase of the surrogate function \surrogate, and the test, or online deployment, phase where \xQ{} is calculated.}
     \label{fig:sq_test_train}
+    \vspace{-0.5cm}
 \end{figure}
 
 \subsection{Learning \surrogate}
@@ -49,7 +50,7 @@ Using \hell{} the overlap between $T$ and $C$ can be calculated. However, there 
 \hell{} as a distance measure is always greater than zero, and so information that indicates if a distribution is generally better or worse (i.e. more or less expected reward) is lost. In order to keep this information the sign of the difference between the expected rewards of the two distributions $\text{sgn}(\mu_1-\mu_2)$ can be used.
 
 \subsubsection{Global Scale: $\bm{(r_H-r_L)}$}
-The next consideration is that just because distance between two distributions may be great or small, does not mean the same applies from a higher-level, or global, perspective. In an extreme case one might imagine two Normal distributions with means $\mu_1=1$ and $\mu_2=2$, and low variances $\sigma_1^2=\sigma_2^2=1e\-5$. In this case the Hellinger distance between the two would be $1$ since they share practically no overlapping probability. However, if the means of the distributions are nearly equal on the global scale (e.g. rewards from many other training tasks are on the range $[-1e3,1e3]$), then the quantity of \hell{} isn't critical from that perspective.
+The next consideration is that just because distance between two distributions may be great or small, does not mean the same applies from a higher-level, or global, perspective. In an extreme case one might imagine two Normal distributions with means $\mu_1=1$ and $\mu_2=2$, and low variances $\sigma_1^2=\sigma_2^2=1e\-5$. In this case the Hellinger distance between the two would be $1$ since they share practically no overlapping probability. However, if the means of the distributions are nearly equal on the global scale (e.g. rewards from many other training tasks are on the range $[-1e3,1e3]$), then the quantity of \hell{} isn't the critical factor.
 
 \subsubsection{Putting the pieces together}
 Using the points discussed above the expression for the quality of candidate solver \solve{} w.r.t. the reference solver \solvestar{} is (again see Fig.~\ref{fig:sq_v2} for intuition):
@@ -91,4 +92,5 @@ At C the candidate solver \solve{} has higher expected reward than \solvestar, b
     \end{subfigure} 
     \caption{Assessing \xQ{} calculation on reward fxn's: \solvestar{} (blue) and \solve{} (red). Points of interest indicated by a star.}
     \label{fig:sq_thry1}
+    \vspace{-0.4cm}
 \end{figure}

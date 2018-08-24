@@ -1,7 +1,7 @@
 \section{Results} \label{sec:results}
 In order to investigate how \xQ{} performs on a more realistic scenario the VIP escort problem introduced in Sec.~\ref{sec:vip_escort} will be used. While the original problem is defined as a POMDP, here we investigate a somewhat simpler version of the problem, and instead use fully observable MDPs. This is reasonable because \xQ{} operates on reward distributions, which are produced by policies on any decision making problem. The benefit of using MDPs is that they are computationally less burdensome than POMDPs, while still being capable of being applied to complex decision problems.
 
-In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver will be used. As the name suggests MCTS involves building a tree from the starting state of the UGV and simulating a specified number of actions into the future in order to calculate the utility of each state. This process is repeated many times, and the utilities of each state are updated after each iteration. The actions selected by MCTS are based not only on the current utility of the state, but an exploration parameter that helps ensure that the search doesn't simply exploit the greatest known utilities. An MCTS solver is convenient to use during these experiments because the quality of the solver can be changed by modifying the parameters.
+In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver will be used \cite{Browne2012-fo}. As the name suggests MCTS involves building a tree from the starting state of the UGV and simulating a specified number of actions/transitions into the future in order to calculate the utility of each state. This process is repeated many times, and the utilities of each state are updated after each iteration. The actions selected by MCTS are based not only on the current utility of the state, but an exploration parameter that helps ensure that the search doesn't simply exploit the greatest known utilities. An MCTS solver is convenient to use during these experiments because the quality of the solver can be easily changed by modifying the parameters.
 
 \begin{figure}[tbp]
     \centering
@@ -15,19 +15,21 @@ In order to find a policy for the MDP, a Monte-Carlo Tree Search (MCTS) solver w
     \hfill
     \begin{subfigure}[b]{0.50\linewidth}
         \centering
-        \includegraphics[width=0.7\linewidth]{Figures/medium_roadnet.png}
+        \includegraphics[width=0.6\linewidth]{Figures/medium_roadnet.png}
         \caption{Road network N=45}
         \label{fig:med_roadnet}
     \end{subfigure} 
     \caption{Example road networks. UGV starts at yellow, Pursuer beings at red, and the exit is green.}
+    \vspace{-0.2cm}
 \end{figure}
 
-The road network is represented as shown in Fig.~\ref{fig:roadnet}. The UGV begins at the yellow node (node 1), the pursuer begins at the red node (node 4), and the desired exit is indicated by the green node (node 13). The problem is defined by the following parameters:
+The road network is represented as shown in Fig.~\ref{fig:roadnet}. The UGV begins at the yellow node (node 1), the pursuer begins at the red node (node 4), and the desired exit is indicated by the green node (node 13). The problem is defined by the parameters listed in Table~\ref{tab:params}
 
 \tymin=80pt
 \begin{table}[tbp]
 \footnotesize
 \caption{Table of parameters: simplified VIP escort problem}
+\label{tab:params}
 \begin{tabulary}{\linewidth}{LL}
 \hline
 Parameter    & Description\\
@@ -58,18 +60,19 @@ $rwd_{sense}$  & The reward for making a movement\\
         3 & ${p_{trans}}$& Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[1000.0]$ & $[8,3,1]$ & 1000 & 2000 & -2000 & -100\\
         4 & ${p_{trans},e_{mcts}}$ & Fig.~\ref{fig:roadnet} & $[0.0,1.0]$ & $0.95$ & 13 & $[10.0,1000.0]$ & $[8,3,1]$ & 1000 & 2000 & -2000 & -100\\
     \end{tabular}
+    \vspace{-0.3cm}
 \end{table*}
 
-Three evaluations were completed. First, \xQ{} was calculated for MCTS solvers with different parameters. (all other parameters were held constant). Second, \xQ{} was evaluated for a candidate solver with varying task parameters. Finally, \xQ{} was evaluated for a candidate solver with different task \emph{and} solver parameters.
+Three separate evaluations were completed. First, \xQ{} was calculated for MCTS solvers with varying depth parameters (all others held constant). Second, \xQ{} was evaluated for a candidate solver with varying task parameters. Finally, \xQ{} was evaluated for a candidate solver with varying task \emph{and} solver parameters.
 
 \subsection{Varying A Solver Parameter}
-This evaluation involved experiments 1 and 2 from Table~\ref{tab:exps}. MCTS Solvers of varying depths were used to find solutions to each of the twonetworks. In each case one of the solvers was chosen as the trusted one (i.e. chose a `good' solver). In the case of experiment 1 \solvestar{} was the $d_{mcts}=9$ solver, and in experiment 2 \solvestar{} was the $d_{mcts}=25$ solver. A surrogate \surrogate{} was not used for this evaluation, instead \rwdstar{} was calculated directly and used for comparison.
+This evaluation involved experiments 1 and 2 from Table~\ref{tab:exps}. MCTS Solvers of varying depths were used to find solutions to each of the two networks. In each case one of the solvers was chosen as the trusted one (i.e. chose a `good' solver). In the case of experiment 1 \solvestar{} was the $d_{mcts}=9$ solver, and in experiment 2 \solvestar{} was the $d_{mcts}=25$ solver. A surrogate \surrogate{} was not used for this evaluation, instead \rwdstar{} was calculated directly and used for comparison.
 
-The results for experiment 1 are shown in Fig.~\ref{fig:mcts_d}. As expected \xQ{} between the trusted solver and itself is 1.0. We see that candidate solvers depth 6 through 10 are about equivalent to the trusted solver (and each other), which indicates they are similarly capable of solving the problem. Whereas candidate solvers with depth 1 through 3 are much less capable than the trusted solver.
+The results for experiment 1 are shown in Fig.~\ref{fig:mcts_d}. As expected \xQ{} between \solvestar{} and itself is 1.0. We see that candidate solvers depth 6 through 10 are about equivalent to \solvestar{} (and each other), which indicates they are similarly capable of solving the problem. Whereas candidate solvers with depth 1 through 3 are much less capable than the trusted solver.
 
-The results of experiment 2 are shown in Fig.~\ref{fig:mcts_d_med}, where the trusted solver with $d_{mcts}=5$ has been selected. According to the plot only solvers of depth 22, and 28 have similar capability to the trusted solver. Note, that the $d_{mcts}=1$ solver has $x_Q=0.83$, this is most possibly due to the fact that the depth 1 solver will make decisions based on little foresight, while solver with depths from 4 to 19 have enough foresight to hesitate and accumulate negative rewards from not moving quickly.
+The results of experiment 2 are shown in Fig.~\ref{fig:mcts_d_med}, where \solvestar{} with $d_{mcts}=5$ has been selected. According to the plot only solvers of depth 22, and 28 have similar capability to \solvestar{}. Note, that the $d_{mcts}=1$ solver has $x_Q=0.83$, this is most possibly due to the fact that the depth 1 solver will make decisions based on little foresight, while solver with depths from 4 to 19 have enough foresight to hesitate and accumulate negative rewards from not moving quickly.
 
-An important insight is that while the $d_{mcts}=9$ solver is very capable of solving the small network from Fig.~\ref{fig:roadnet}, that performance does not extent to the medium sized network from Fig.~\ref{fig:med_roadnet}. The $d_{mcts}=7 \text{ and} 10$ solvers are very incapable compared to the trusted solver of $d_{mcts}=25$, this is reflected by the value of \xQ.
+An important insight is that while the $d_{mcts}=9$ solver is very capable of solving the small network from Fig.~\ref{fig:roadnet}, that performance does not extend to the medium sized network from Fig.~\ref{fig:med_roadnet}. The $d_{mcts}=7 \text{ and } 10$ solvers are very incapable compared to the trusted solver of $d_{mcts}=25$, this is reflected by the value of \xQ.
 
 \begin{figure}[tbp]
     \centering
@@ -88,14 +91,15 @@ An important insight is that while the $d_{mcts}=9$ solver is very capable of so
         \label{fig:mcts_d_med}
     \end{subfigure} 
     \caption{Experiment results. \xQ{} is calculated w.r.t \solvestar{} highlighted in blue.}
+    \vspace{-0.5cm}
 \end{figure}
 
 \subsection{Varying A Task Parameter}
-Experiment 3 was used for this evaluation, \solvestar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. The surrogate model \surrogate{} was learned using a two generic deep neural networks  with three hidden layers. One network to learn to predict the mean reward, and the other to predict the standard deviation (\surrogate{} here is a combination two models). In a fairly simple problem such as this one a DNN of this configuration is likely overkill, but it demonstrates the possibility of using an arbitrarily complex black box model for \surrogate.
+Experiment 3 was used for this evaluation, where \solvestar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. The surrogate model \surrogate{} was learned using two generic deep neural networks with three hidden layers. One network to learn to predict the mean reward, and the other to predict the standard deviation (\surrogate{} here uses the output of two models). In a fairly simple problem such as this one a DNN of this configuration is likely overkill, but it demonstrates the possibility of using an arbitrarily complex black box model for \surrogate.
 
-Figure~\ref{fig:tprob_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
+Figure~\ref{fig:tprob_ok} shows the results for \solve{} with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ \solve{} is slightly more capable than \solvestar{}. Whereas, at $p_{trans}=0.75$ \solve{} is slightly less capable.
 
-Figure~\ref{fig:tprob_bad} shows the results for the candidate solver with $d_{mcts}=1$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is moderately less capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly much less capable.
+Figure~\ref{fig:tprob_bad} shows the results for the candidate solver with $d_{mcts}=1$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is moderately less capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly much less capable. These values correspond to expected behavior of \xQ.
 
 \begin{figure}[tbp]
     \centering
@@ -114,20 +118,21 @@ Figure~\ref{fig:tprob_bad} shows the results for the candidate solver with $d_{m
         \label{fig:tprob_bad}
     \end{subfigure} 
     \caption{Comparison of \solve{} to \solvestar{} of depth 8.}
+    \vspace{-0.5cm}
 \end{figure}
 
 \subsection{Varying Task and Solver Parameters}
-Experiment 4 was used for this evaluation, \solvestar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. Both $p_{trans}$ and $e_{mcts}$ were variable for the experiments. The results are found in Figs.~\ref{fig:tprob_emcts_ok} and \ref{fig:tprob_emcts_bad}. The surrogate \surrogate{} used here is the same as in the previous evaluation (i.e. two DNNs to predict mean and standard deviation).
+Experiment 4 was used for this evaluation, where \solvestar{} is a depth 8 solver, while the two candidate solvers were depth 3 and depth 1. Both $p_{trans}$ and $e_{mcts}$ were variable for the experiments. The results are found in Figs.~\ref{fig:tprob_emcts_ok} and \ref{fig:tprob_emcts_bad}. The surrogate \surrogate{} used here is the same as in the previous evaluation (i.e. two DNNs to predict mean and standard deviation).
 
-Figure~\ref{fig:tprob_emcts_ok} shows the results for the candidate solver with $d_{mcts}=3$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is slightly more capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly less capable.
+Figure~\ref{fig:tprob_emcts_ok} shows the results for \solve{} with $d_{mcts}=3$ at two different points of interest. At A \solve{} is slightly less capable than \solvestar{}, \xQ{} is similar at B as well.
 
-Figure~\ref{fig:tprob_emcts_bad} shows the results for the candidate solver with $d_{mcts}=1$ at two different values of $p_{trans}$. At $p_{trans}=0.25$ the candidate solver is moderately less capable than the trusted solver. Whereas, at $p_{trans}=0.75$ the candidate solver is slightly much less capable.
+Figure~\ref{fig:tprob_emcts_bad} shows the results for \solve{} with $d_{mcts}=1$ at two different points of interest. At A \solve{} is slightly more capable than \solvestar{}. Whereas, at B \solve{} is moderately worse than \solvestar{}.
 
  \begin{figure}[tbp]
     \centering
     \begin{subfigure}[b]{0.98\linewidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
+        \includegraphics[width=0.75\linewidth]{Figures/transition_e_vary_e_mctstprob_ok.pdf}
         \vfill
         \caption{Candidate solver depth 3}
         \label{fig:tprob_emcts_ok}
@@ -135,9 +140,10 @@ Figure~\ref{fig:tprob_emcts_bad} shows the results for the candidate solver with
     \hfill
     \begin{subfigure}[b]{0.98\linewidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
+        \includegraphics[width=0.75\linewidth]{Figures/transition_e_vary_e_mctstprob_bad.pdf}
         \caption{Candidate solver depth 1}
         \label{fig:tprob_emcts_bad}
     \end{subfigure}
     \caption{Comparison of \solve{} to \solvestar{} of depth 8. The top-left shows the mean reward of \solvestar{}, the bottom-left is the std. of \solvestar{}. Figures on RHS show \xQ{} (SQ) at points A, and B.}
+    \vspace{-0.7cm}
 \end{figure}
