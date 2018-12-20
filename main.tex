@@ -1,11 +1,14 @@
-\documentclass[letterpaper]{article}
-\usepackage{aaai19}
-\usepackage{times}
-\usepackage{helvet}
-\usepackage{courier}
-\usepackage{url}
-\usepackage{graphicx}
-\frenchspacing
+\documentclass[10pt]{article}
+
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    % total={170mm,257mm},
+    left=43.9mm,
+    right=43.9mm,
+    top=52.1mm,
+    bottom=52.1mm,
+    }
 
 \usepackage{pgfgantt}
 \usepackage{booktabs}
@@ -17,9 +20,6 @@
 % \usepackage[caption=false]{subfig}
 % \captionsetup{width=\linewidth}
 \usepackage{enumitem}
-
-\setlength{\pdfpagewidth}{8.5in}
-\setlength{\pdfpageheight}{11in}
 
 %%%%% shortcut commands
 \newcommand{\famsec}{FaMSeC}
@@ -90,6 +90,5 @@
 \input{"conclusions.tex"}
 
 \bibliography{References}
-\bibliographystyle{aaai}
 
 \end{document}
